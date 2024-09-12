@@ -9,6 +9,8 @@ const Landing = () => {
           Weyland-Yutani <br /> Corporation
         </h1>
         <div className="flex flex-col font-light">
+          {/* This will be removed once User Auth is introduced
+              so that the user is forced to log in to continue */}
           <Link
             to="/home"
             className="p-1 m-2 min-w-[100px] text-center bg-emerald-700 hover:bg-emerald-800 uppercase"
@@ -16,13 +18,13 @@ const Landing = () => {
             Enter
           </Link>
           <Link
-            to="/home"
+            to="/login"
             className="p-1 m-2 min-w-[100px] text-center bg-emerald-700 hover:bg-emerald-800 uppercase"
           >
             Login
           </Link>
           <Link
-            to="/home"
+            to="/signup"
             className="p-1 m-2 min-w-[100px] text-center bg-emerald-700 hover:bg-emerald-800 uppercase"
           >
             Sign Up
