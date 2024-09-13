@@ -1,21 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import network from "../../public/icons8-networking-100.png";
+import network from "/icons8-networking-100.png";
 
 const Signup = () => {
   return (
     <>
       <div className="flex flex-col justify-center h-screen">
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-evenly">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-row justify-between">
             <Link to="/">
               <img
                 src={network}
-                alt="Alien"
-                className="bg-emerald-400 rounded-lg hover:rounded-2xl hover:bg-emerald-300 transition-all duration-500"
+                alt="Structures of Data"
+                className="bg-emerald-400 min-h-[100px] min-w-[100px] rounded-lg hover:rounded-2xl hover:bg-emerald-300 transition-all duration-500"
               />
             </Link>
-            <h2 className="p-2 text-end text-balance text-2xl font-bold leading-9 tracking-tight text-emerald-400 ">
+            <h2 className="orbitron p-2 text-end text-balance text-2xl font-bold leading-9 tracking-tight text-emerald-400 ">
               Please enter your data into our system
             </h2>
           </div>
@@ -67,14 +67,14 @@ const Signup = () => {
                     Password
                   </label>
                   {/* This should maybe be removed from sign-up? */}
-                  <div className="text-sm">
+                  {/* <div className="text-sm">
                     <a
                       href="#"
                       className="font-semibold text-emerald-400 hover:text-emerald-300"
                     >
                       Forgot password?
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="mt-2">
                   <input
