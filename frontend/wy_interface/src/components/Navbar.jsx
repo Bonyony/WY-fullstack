@@ -1,21 +1,44 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Menu = () => {
   return (
+    <>
+      <div className="flex flex-row justify-between py-4 px-6">
+        <NavLink to="/">
+          <h1 className="orbitron">Weyland-Yutani Corporation</h1>
+        </NavLink>
+        <ul className="flex flex-row gap-5 orbitron">
+          <li className="hover:text-yellow-200">
+            <NavLink to="/home/chat">Chat Logs</NavLink>
+          </li>
+          <li className="hover:text-yellow-200">
+            <NavLink to="/home/buy">Buy</NavLink>
+          </li>
+          <li className="hover:text-yellow-200">
+            <NavLink to="/home/alien">Aliens</NavLink>
+          </li>
+          <li className="hover:text-yellow-200">
+            <NavLink to="/home/profile">Profile</NavLink>
+          </li>
+        </ul>
+      </div>
+    </>
+  );
+};
+
+const SmallMenu = () => {
+  return (
     <ul>
       <li>
-        <Link>Home</Link>
+        <NavLink>Chat Logs</NavLink>
       </li>
       <li>
-        <Link>Chat Logs</Link>
+        <NavLink>Buy</NavLink>
       </li>
       <li>
-        <Link>Buy</Link>
-      </li>
-      <li>
-        <Link>Aliens</Link>
+        <NavLink>Aliens</NavLink>
       </li>
     </ul>
   );
@@ -27,9 +50,11 @@ const Navbar = () => {
   return (
     <div>
       <div>
-        <div className="md:hidden">Small Menu</div>
         <div className="hidden md:block">
           <Menu />
+        </div>
+        <div className="md:hidden">
+          <SmallMenu />
         </div>
       </div>
     </div>

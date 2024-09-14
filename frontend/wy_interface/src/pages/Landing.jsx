@@ -12,7 +12,7 @@ const Landing = () => {
           {/* This will be removed once User Auth is introduced
               so that the user is forced to log in to continue */}
           <Link
-            to="/home"
+            to="/home/chat"
             className="p-1 m-2 min-w-[100px] text-center bg-emerald-700 hover:bg-emerald-800 uppercase"
           >
             Enter
