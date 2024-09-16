@@ -1,14 +1,29 @@
+// dependencies
 const express = require("express");
+const mongoose = require("mongoose");
+const logger = require("morgan");
 // express app
 const app = express();
 const bcrypt = require("bcrypt");
-
+// app uses
 app.use(express.json());
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(logger("dev"));
+
+// mogodb
+const dbURI =
+  "mongodb+srv://frankiefrancione:Mynodeserver@node-server-cluster.teyfw.mongodb.net/WY_server?retryWrites=true&w=majority&appName=node-server-cluster";
+// connect to DB
+mongoose
+  .connect(dbURI)
+  .then((result) => {
+    console.log("Connected to DB");
+    app.listen(3000);
+  })
+  .catch((err) => console.log(err));
 
 // User auth below should be broken into middleware
-
-// this should be a MySQL database, the array is for testing
-const users = [];
 
 // GET user(s)
 app.get("/users", (req, res) => {
@@ -47,5 +62,3 @@ app.post("/users/login", async (req, res) => {
     res.status(500).send();
   }
 });
-
-app.listen(3000);
