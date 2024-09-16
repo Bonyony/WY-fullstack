@@ -4,13 +4,15 @@ import network from "/icons8-networking-100.png";
 const Footer = () => {
   return (
     <>
-      <div className="bg-white text-black p-2 flex flex-row justify-between align-middle">
+      <div className="px-2 py-4 text-yellow-200 flex flex-col items-center justify-evenly gap-5">
+        <p className="">
+          Co-operation is non-negotiable. Thank you for understanding.
+        </p>
         <img
           src={network}
           alt="Structures of Data"
-          className="bg-emerald-400 p-2 max-h-[36px] max-w-[36px] rounded-full  hover:bg-emerald-300 transition-all duration-500"
+          className="bg-yellow-300 p-2 max-h-[36px] max-w-[36px] rounded-full  hover:bg-yellow-200 transition-all duration-500"
         />
-        <p>Co-operation is non-negotiable. Thank you for understanding.</p>
       </div>
     </>
   );
