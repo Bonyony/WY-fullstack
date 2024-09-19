@@ -2,8 +2,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
+// http and server.listen, may have to be used for chat room portion?
+const http = require("http");
 // express app
 const app = express();
+// encryption
 const bcrypt = require("bcrypt");
 // app uses
 app.use(express.json());
@@ -19,6 +22,7 @@ mongoose
   .connect(dbURI)
   .then((result) => {
     console.log("Connected to DB");
+    // may have to be changed for live chat portion
     app.listen(3000);
   })
   .catch((err) => console.log(err));
