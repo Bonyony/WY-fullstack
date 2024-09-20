@@ -2,16 +2,22 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const logger = require("morgan");
+const cors = require("cors");
+const cookieSession = require("cookie-session");
 // http and server.listen, may have to be used for chat room portion?
 const http = require("http");
-// express app
-const app = express();
 // encryption
 const bcrypt = require("bcrypt");
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;
 
+// express app and cors setup
+const app = express();
+let corsOption = {
+  origin: "http://localhost:5173",
+};
+app.use(cors(corsOption));
 // connect to the database
 connectToDB();
 
@@ -20,6 +26,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(logger("dev"));
+// cookie sessions
+const cookieSecret = process.env.COOKIE_SECRET;
+app.use(
+  cookieSession({
+    name: "robotic-session",
+    keys: cookieSecret,
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
 
 // User auth below should be broken into middleware
 
