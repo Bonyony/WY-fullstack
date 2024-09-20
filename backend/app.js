@@ -1,6 +1,6 @@
 // dependencies
 const express = require("express");
-const mongoose = require("mongoose");
+const dotenv = require("dotenv").config();
 const logger = require("morgan");
 // http and server.listen, may have to be used for chat room portion?
 const http = require("http");
@@ -8,24 +8,18 @@ const http = require("http");
 const app = express();
 // encryption
 const bcrypt = require("bcrypt");
+
+const connectToDB = require("./config/db");
+const port = process.env.PORT || 3000;
+
+// connect to the database
+connectToDB();
+
 // app uses
 app.use(express.json());
-app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 app.use(logger("dev"));
-
-// mogodb
-const dbURI =
-  "mongodb+srv://frankiefrancione:Mynodeserver@node-server-cluster.teyfw.mongodb.net/WY_server?retryWrites=true&w=majority&appName=node-server-cluster";
-// connect to DB
-mongoose
-  .connect(dbURI)
-  .then((result) => {
-    console.log("Connected to DB");
-    // may have to be changed for live chat portion
-    app.listen(3000);
-  })
-  .catch((err) => console.log(err));
 
 // User auth below should be broken into middleware
 
@@ -66,3 +60,6 @@ app.post("/users/login", async (req, res) => {
     res.status(500).send();
   }
 });
+
+app.listen(port);
+console.log(`Listening on port ${port}`);

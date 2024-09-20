@@ -23,7 +23,17 @@ const Profile = () => {
 
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center align-middle">
-      Profile
+      <div
+        id="profile-card"
+        className="p-4 bg-yellow-200 text-black rounded-sm"
+      >
+        <h2 className="text-xl">
+          Welcome Username, please review our data-banks
+        </h2>
+        <p>Time in our system: </p>
+        <p>Preffered space-org: </p>
+        <p>Your biography: </p>
+      </div>
     </div>
   );
 };
