@@ -14,10 +14,11 @@ const port = process.env.PORT || 3000;
 
 // express app and cors setup
 const app = express();
-let corsOption = {
-  origin: "http://localhost:5173",
+let corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
 };
-app.use(cors(corsOption));
+app.use(cors(corsOptions));
 // connect to the database
 connectToDB();
 
@@ -27,14 +28,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(logger("dev"));
 // cookie sessions
-const cookieSecret = process.env.COOKIE_SECRET;
+const cookieKey = process.env.COOKIE_SECRET;
 app.use(
   cookieSession({
     name: "robotic-session",
-    keys: cookieSecret,
+    keys: [cookieKey],
+    httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   })
 );
+
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to frank sample application." });
+});
 
 // User auth below should be broken into middleware
 
