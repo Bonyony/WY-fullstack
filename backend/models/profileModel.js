@@ -16,6 +16,12 @@ const profileSchema = new Schema(
       type: String,
       required: [true, "Please enter a password"],
     },
+    roles: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Role",
+      },
+    ],
   },
   { timestamps: true }
 );
