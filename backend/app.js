@@ -39,7 +39,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to frank sample application." });
+  res.json({ message: "Welcome to frank's sample application." });
 });
 
 // User auth below should be broken into middleware
