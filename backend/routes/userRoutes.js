@@ -7,18 +7,19 @@ module.exports = function (app) {
     next();
   });
 
-  app.get("/all", controller.allAccess);
+  // test routes to see user capabilities
+  app.get("/test/all", controller.allAccess);
 
-  app.get("/user", [authJWT.verifyToken], controller.userBoard);
+  app.get("/test/user", [authJWT.verifyToken], controller.userBoard);
 
   app.get(
-    "/mod",
+    "/test/mod",
     [authJWT.verifyToken, authJWT.isModerator],
     controller.moderatorBoard
   );
 
   app.get(
-    "/admin",
+    "/test/admin",
     [authJWT.verifyToken, authJWT.isAdmin],
     controller.adminBoard
   );

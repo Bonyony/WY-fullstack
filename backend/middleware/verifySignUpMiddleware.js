@@ -6,7 +6,7 @@ const checkDuplicates = (req, res, next) => {
   // username
   Profile.findOne({
     username: req.body.username,
-  }).exec((err, user) => {
+  }).then(function (err, user) {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -19,7 +19,7 @@ const checkDuplicates = (req, res, next) => {
     // email
     Profile.findOne({
       email: req.body.email,
-    }).exec((err, user) => {
+    }).then(function (err, user) {
       if (err) {
         res.status(500).send({ message: err });
         return;
