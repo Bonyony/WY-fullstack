@@ -13,47 +13,36 @@ exports.signup = (req, res) => {
     password: bcrypt.hashSync(req.body.password, 10),
   });
 
-  profile.save((err, profile) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    if (req.body.roles) {
-      Role.find(
-        {
-          // may have to change this
-          name: { $in: req.body.roles },
-        },
-        (err, roles) => {
-          if (err) {
-            res.status(500).send({
-              message: err,
-            });
-            return;
-          }
-
-          user.roles = roles.map((role) => role._id);
-          user.save((err) => {
+  profile
+    .save()
+    .then(() => {
+      if (req.body.roles) {
+        Role.find(
+          {
+            // may have to change this
+            name: { $in: req.body.roles },
+          },
+          (err, roles) => {
             if (err) {
-              res.status(500).send({ message: err });
+              res.status(500).send({
+                message: "Line 28 10/1",
+              });
               return;
             }
-          });
 
-          res.send({ message: "User was registered succesfully" });
-        }
-      );
-    } else {
-      Role.findOne({ name: "user" }, (err, role) => {
-        if (err) {
-          res.status(500).send({
-            message: err,
-          });
-          return;
-        }
+            user.roles = roles.map((role) => role._id);
+            user.save().catch((err) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+            });
 
-        user.roles = [role._id];
-        user.save((err) => {
+            res.send({ message: "User was registered successfully" });
+          }
+        );
+      } else {
+        Role.findOne({ name: "user" }, (err, role) => {
           if (err) {
             res.status(500).send({
               message: err,
@@ -61,11 +50,23 @@ exports.signup = (req, res) => {
             return;
           }
 
-          res.send({ message: "User was registered succesfully" });
+          user.roles = [role._id];
+          user.save().catch((err) => {
+            if (err) {
+              res.status(500).send({
+                message: err,
+              });
+              return;
+            }
+            res.send({ message: "User was registered succesfully" });
+          });
         });
-      });
-    }
-  });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({ message: err });
+      return;
+    });
 };
 
 exports.login = (req, res) => {
