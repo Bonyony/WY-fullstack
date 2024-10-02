@@ -24,66 +24,62 @@ const verifyToken = (req, res, next) => {
 };
 
 // check for admin and moderator status
-const isAdmin = (req, res, next) => {
-  Profile.findById(req.userID).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    Role.find(
-      {
-        // may have to rework this and the '$in'
-        _id: { $in: user.roles },
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
+const isAdmin = async (req, res, next) => {
+  try {
+    // Find the user by their ID
+    const user = await Profile.findById(req.userID);
 
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
-            next();
-            return;
-          }
-        }
-        res.status(403).send({ message: "This requires an Admin level." });
-        return;
-      }
-    );
-  });
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    // Find the roles associated with the user
+    const roles = await Role.find({ _id: { $in: user.roles } });
+
+    // Check if any of the user's roles is "admin"
+    const isAdminRole = roles.some((role) => role.name === "admin");
+
+    if (isAdminRole) {
+      return next(); // User is admin, proceed to next middleware
+    } else {
+      return res
+        .status(403)
+        .send({ message: "This action requires Admin level." });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      message: err.message || "An error occurred while checking admin status.",
+    });
+  }
 };
 
-const isModerator = (req, res, next) => {
-  Profile.findById(req.userID).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    Role.find(
-      {
-        // may have to rework this and the '$in'
-        _id: { $in: user.roles },
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
+// same logic as admin, but for moderator
+const isModerator = async (req, res, next) => {
+  try {
+    const user = await Profile.findById(req.userID);
 
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "moderator") {
-            next();
-            return;
-          }
-        }
-        res
-          .status(403)
-          .send({ message: "This requires at least Moderator level." });
-        return;
-      }
-    );
-  });
+    if (!user) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    // Find the roles associated with the user
+    const roles = await Role.find({ _id: { $in: user.roles } });
+    // Check if any of the user's roles is "moderator"
+    const isModeratorRole = roles.some((role) => role.name === "moderator");
+
+    if (isModeratorRole) {
+      return next(); // User is moderator, proceed to next middleware
+    } else {
+      return res
+        .status(403)
+        .send({ message: "This action requires Moderator level." });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      message:
+        err.message || "An error occurred while checking moderator status.",
+    });
+  }
 };
 
 const authJWT = {

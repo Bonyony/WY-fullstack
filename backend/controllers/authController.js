@@ -6,116 +6,86 @@ const Role = dbModels.role;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-exports.signup = (req, res) => {
-  const profile = new Profile({
-    username: req.body.username,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 10),
-  });
-
-  profile
-    .save()
-    .then(() => {
-      if (req.body.roles) {
-        Role.find(
-          {
-            // may have to change this
-            name: { $in: req.body.roles },
-          },
-          (err, roles) => {
-            if (err) {
-              res.status(500).send({
-                message: "Line 28 10/1",
-              });
-              return;
-            }
-
-            user.roles = roles.map((role) => role._id);
-            user.save().catch((err) => {
-              if (err) {
-                res.status(500).send({ message: err });
-                return;
-              }
-            });
-
-            res.send({ message: "User was registered successfully" });
-          }
-        );
-      } else {
-        Role.findOne({ name: "user" }, (err, role) => {
-          if (err) {
-            res.status(500).send({
-              message: err,
-            });
-            return;
-          }
-
-          user.roles = [role._id];
-          user.save().catch((err) => {
-            if (err) {
-              res.status(500).send({
-                message: err,
-              });
-              return;
-            }
-            res.send({ message: "User was registered succesfully" });
-          });
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err });
-      return;
+exports.signup = async (req, res) => {
+  try {
+    const profile = new Profile({
+      username: req.body.username,
+      email: req.body.email,
+      password: await bcrypt.hash(req.body.password, 10),
     });
+    const savedProfile = await profile.save();
+
+    // If roles are provided in the request body
+    if (req.body.roles) {
+      const roles = await Role.find({
+        name: { $in: req.body.roles },
+      });
+
+      savedProfile.roles = roles.map((role) => role._id);
+    } else {
+      // Assign default "user" role if no roles are provided
+      const defaultRole = await Role.findOne({ name: "user" });
+      savedProfile.roles = [defaultRole._id];
+    }
+
+    // Save the updated profile with roles
+    await savedProfile.save();
+
+    res.send({ message: "User was registered successfully" });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while signing up the user.",
+    });
+  }
 };
 
-exports.login = (req, res) => {
-  Profile.findOne({
-    username: req.body.username,
-  })
-    .populate("roles", "-__v")
-    .exec((err, user) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
+exports.login = async (req, res) => {
+  try {
+    // Find the user by username and populate roles
+    const user = await Profile.findOne({
+      username: req.body.username,
+    }).populate("roles", "-__v");
 
-      if (!user) {
-        return res
-          .status(404)
-          .send({ message: "User not found in our system." });
-      }
+    if (!user) {
+      return res.status(404).send({ message: "User not found in our system." });
+    }
 
-      let passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
+    const passwordIsValid = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
 
-      if (!passwordIsValid) {
-        return res.status(401).send({ message: "Invalid Password" });
-      }
+    if (!passwordIsValid) {
+      return res.status(401).send({ message: "Invalid Password" });
+    }
 
-      const token = jwt.sign({ id: user.id }, config.secret, {
-        algorithm: "HS256",
-        allowInsecureKeySizes: true,
-        expiresIn: 86400,
-      });
-
-      let authorities = [];
-
-      for (let i = 0; i < user.roles.length; i++) {
-        authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
-      }
-
-      req.session.token = token;
-
-      res.status(200).send({
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        roles: authorities,
-      });
+    // Generate JWT token
+    const token = jwt.sign({ id: user.id }, config.secret, {
+      algorithm: "HS256",
+      allowInsecureKeySizes: true,
+      expiresIn: 86400, // 24 hours
     });
+
+    // Create authorities array based on user's roles
+    const authorities = user.roles.map(
+      (role) => "ROLE_" + role.name.toUpperCase()
+    );
+
+    // Store token
+    req.session.token = token;
+
+    // Send successful response with user details
+    res.status(200).send({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: authorities,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: err.message || "Some error occurred during login." });
+  }
 };
 
 exports.signout = async (req, res) => {
