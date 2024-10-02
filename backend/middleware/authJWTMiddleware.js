@@ -26,7 +26,6 @@ const verifyToken = (req, res, next) => {
 // check for admin and moderator status
 const isAdmin = async (req, res, next) => {
   try {
-    // Find the user by their ID
     const user = await Profile.findById(req.userID);
 
     if (!user) {

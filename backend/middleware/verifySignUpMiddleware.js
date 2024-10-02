@@ -2,37 +2,33 @@ const dbModels = require("../models");
 const ROLES = dbModels.ROLES;
 const Profile = dbModels.profile;
 
-const checkDuplicates = (req, res, next) => {
-  // username
-  Profile.findOne({
-    username: req.body.username,
-  }).then(function (err, user) {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    if (user) {
-      res
+const checkDuplicates = async (req, res, next) => {
+  try {
+    const existingUsername = await Profile.findOne({
+      username: req.body.username,
+    });
+    if (existingUsername) {
+      return res
         .status(400)
         .send({ message: "Failed! That username is already taken..." });
     }
-    // email
-    Profile.findOne({
-      email: req.body.email,
-    }).then(function (err, user) {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-      if (user) {
-        res
-          .status(400)
-          .send({ message: "Failed! That email is already taken..." });
-      }
 
-      next();
-    });
-  });
+    const existingEmail = await Profile.findOne({ email: req.body.email });
+    if (existingEmail) {
+      return res
+        .status(400)
+        .send({ message: "Failed! That email is already taken..." });
+    }
+
+    next();
+  } catch (err) {
+    res
+      .status(500)
+      .send({
+        message:
+          err.message || "An error occurred while checking for duplicates.",
+      });
+  }
 };
 
 const checkRoles = (req, res, next) => {
