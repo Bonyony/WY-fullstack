@@ -10,13 +10,13 @@ const Profile = () => {
     axios
       // server hit THIS SHOULD NOT BE EMPTY
       .get()
-      .then((response) => {
-        setProfile(response.data);
+      .then((res) => {
+        setProfile(res.data);
         setLoading(false);
-        console.log(response.data);
+        console.log(res.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
         setLoading(false);
       });
   }, []);

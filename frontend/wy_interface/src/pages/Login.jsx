@@ -14,7 +14,7 @@ const Login = () => {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" action="/" method="POST">
               {/* I don't think I'll use this for login, but you never know */}
               {/* <div>
                 <label

@@ -4,10 +4,6 @@ const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-// http and server.listen, may have to be used for chat room portion?
-// const http = require("http");
-// encryption
-// const bcrypt = require("bcrypt");
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;

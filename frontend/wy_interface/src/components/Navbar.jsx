@@ -46,7 +46,7 @@ const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <div className="z-20 fixed top-0 w-full">
+    <div className="z-20 fixed mix-blend-difference top-0 w-full">
       <div className="flex flex-row justify-between  py-4 px-6">
         <NavLink to="/">
           <h1 className="orbitron text-balance text-start">
