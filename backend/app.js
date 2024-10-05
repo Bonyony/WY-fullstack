@@ -40,8 +40,9 @@ app.get("/", (req, res) => {
 // routes
 require("./routes/authRoutes")(app);
 require("./routes/userRoutes")(app);
+require("./routes/profileRoutes")(app);
 
-app.get("/users", (req, res) => {
+app.get("/user", (req, res) => {
   res.json(users);
 });
 
