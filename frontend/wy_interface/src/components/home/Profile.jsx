@@ -3,16 +3,18 @@ import axios from "axios";
 
 const Profile = () => {
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState(null);
   // All of this may be moved to a global context later, this will be for testing!
   useEffect(() => {
     setLoading(true);
     fetchData();
   }, []);
+  // we'll see if this is needed
+  const PORT = 3000 || 3001;
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/user/:id");
+      const res = await axios.get(`http://localhost:3000/profile/:id`);
       setProfile(res.data);
       setLoading(false);
     } catch (error) {
@@ -25,14 +27,29 @@ const Profile = () => {
     <div className="h-screen w-full flex flex-col items-center justify-center align-middle">
       <div
         id="profile-card"
-        className="p-4 bg-yellow-200 text-black rounded-sm"
+        className="p-4 mt-20 h-screen bg-gray-200 text-black rounded-sm"
       >
-        <h2 className="text-xl">
+        <h2 className="text-xl font-black mb-2">
           Welcome Username, please review our data-banks
         </h2>
-        <p>Time in our system: </p>
-        <p>Preffered space-org: </p>
-        <p>Your biography: </p>
+        {/* this will be for a profile picture? maybe. Maybe not an upload, but one that I will supply */}
+        <div className="flex flex-row justify-center m-2 ">
+          <div className="h-16 w-16 bg-emerald-900 rounded-full"></div>
+        </div>
+        <div className="p-2 uppercase flex flex-col gap-4 text-white bg-emerald-900 rounded-md">
+          <div className="flex flex-row justify-between">
+            <p>Time in our system: </p>
+            <p>Undefined</p>
+          </div>
+          <div className="flex flex-row justify-between">
+            <p>Preffered space-org: </p>
+            <p>Undefined</p>
+          </div>
+          <div className="flex flex-row justify-between">
+            <p>Your biography: </p>
+            <p>Undefined</p>
+          </div>
+        </div>
       </div>
     </div>
   );
