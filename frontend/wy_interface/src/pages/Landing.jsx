@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Marquee } from "../components";
 
 const Landing = () => {
   return (
@@ -30,6 +31,7 @@ const Landing = () => {
             Sign Up
           </Link>
         </div>
+        <Marquee />
       </div>
     </>
   );
