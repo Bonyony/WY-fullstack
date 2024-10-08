@@ -2,9 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import "../styles/marquee.css";
 
+// still kind of choppy :(
 const marqueeVariants = {
   animate: {
-    x: [0, -3000],
+    x: [0, -1500],
     transition: {
       x: {
         repeat: Infinity,

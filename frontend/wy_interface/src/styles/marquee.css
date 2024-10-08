@@ -2,7 +2,7 @@
   position: relative;
   width: 100vw;
   max-width: 100%;
-  height: 206px;
+  height: 180px;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -14,7 +14,7 @@
 
 .track > h1 {
   margin: 20px 0;
-  font-size: 8rem;
+  font-size: 6rem;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #009805;

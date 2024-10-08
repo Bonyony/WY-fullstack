@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, Navbar } from "../components";
+import { Footer, Marquee, Navbar } from "../components";
 import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
@@ -10,6 +10,8 @@ const HomeLayout = () => {
       </header>
       <main>
         <Outlet />
+        {/* maybe I'll remove the marquee Idk */}
+        <Marquee />
       </main>
       <footer>
         <Footer />
