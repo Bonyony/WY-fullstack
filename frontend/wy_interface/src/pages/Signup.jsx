@@ -1,8 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import network from "/icons8-networking-100.png";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const formAction = (e) => {
+    e.preventDefault();
+    // alert("Redirecting in 3... 2... 1...");
+    setTimeout(() => {
+      console.log("login!");
+      navigate("/home/profile");
+    }, 1000);
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center h-screen">

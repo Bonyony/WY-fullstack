@@ -1,8 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import alien from "/icons8-alien-64.png";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const formAction = (e) => {
+    e.preventDefault();
+    // alert("Redirecting in 3... 2... 1...");
+    setTimeout(() => {
+      console.log("login!");
+      navigate("/home/profile");
+    }, 1000);
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center h-screen">
@@ -14,7 +24,7 @@ const Login = () => {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="/" method="POST">
+            <form className="space-y-6" onSubmit={formAction} method="POST">
               {/* I don't think I'll use this for login, but you never know */}
               {/* <div>
                 <label

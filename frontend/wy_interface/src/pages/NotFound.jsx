@@ -10,7 +10,7 @@ const NotFound = () => {
           Systems malfunction. Please redirect to home base.
         </p>
         <Link
-          to="/home/chat"
+          to="/"
           className="bg-gray-800 p-2 mt-5 rounded-sm hover:bg-gray-600 hover:text-yellow-300 hover:rounded-lg transition-all duration-500"
         >
           Home
