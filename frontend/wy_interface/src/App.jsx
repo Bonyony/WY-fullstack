@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, createContext, useState } from "react";
 import "./App.css";
 // components and pages
 import { LiveChat, Buy, Alien, Profile, Loading } from "./components";
@@ -16,6 +16,8 @@ import {
 } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import HomeLayout from "./layouts/HomeLayout";
+
+export const ProfileContext = createContext(null);
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,12 +38,16 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  const [profile, setProfile] = useState(null);
+
   return (
     <>
       <div className="suse bg-[var(--background)] text-[var(--text1)]">
-        <Suspense fallback={<Loading />}>
-          <RouterProvider router={router} />
-        </Suspense>
+        <ProfileContext.Provider value={{ profile, setProfile }}>
+          <Suspense fallback={<Loading />}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </ProfileContext.Provider>
       </div>
     </>
   );
