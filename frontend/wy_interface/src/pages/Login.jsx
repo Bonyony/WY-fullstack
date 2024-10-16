@@ -1,17 +1,33 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useContext } from "react";
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import alien from "/icons8-alien-64.png";
+import { ProfileContext } from "../App";
 
 const Login = () => {
+  const { profile, setProfile } = useContext(ProfileContext);
+
   const navigate = useNavigate();
+  // this form action should only fire if the profile returns 200
   const formAction = (e) => {
     e.preventDefault();
-    // alert("Redirecting in 3... 2... 1...");
+    // rework this for sure, setTimeout used for testing currently
     setTimeout(() => {
       console.log("login!");
       navigate("/home/profile");
     }, 1000);
   };
+
+  // fetch profile on submit
+  useEffect(() => {
+    axios
+      .get("localhost:3000/user")
+      .then((res) => {
+        console.log(res.data);
+        setProfile(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
@@ -22,27 +38,9 @@ const Login = () => {
               Welcome back traveller
             </h2>
           </div>
-
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" onSubmit={formAction} method="POST">
-              {/* I don't think I'll use this for login, but you never know */}
-              {/* <div>
-                <label
-                  for="email"
-                  className="block text-sm font-medium leading-6"
-                >
-                  Username
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="username"
-                    name="username"
-                    type="text"
-                    required
-                    className="block w-full  border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div> */}
+              {/* email */}
               <div>
                 <label
                   for="email"
@@ -61,7 +59,7 @@ const Login = () => {
                   />
                 </div>
               </div>
-
+              {/* password */}
               <div>
                 <div className="flex items-center justify-between">
                   <label
@@ -91,7 +89,7 @@ const Login = () => {
                   />
                 </div>
               </div>
-
+              {/* submit button */}
               <div>
                 <button
                   type="submit"

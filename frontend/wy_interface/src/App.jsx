@@ -17,7 +17,7 @@ import {
 import RootLayout from "./layouts/RootLayout";
 import HomeLayout from "./layouts/HomeLayout";
 
-export const ProfileContext = createContext(null);
+export const ProfileContext = createContext({});
 
 const router = createBrowserRouter(
   createRoutesFromElements(
