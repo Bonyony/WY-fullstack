@@ -50,7 +50,7 @@ const Navbar = () => {
       <div className="flex flex-row justify-between  py-4 px-6">
         <NavLink to="/">
           <h1 className="orbitron text-balance text-start">
-            Weyland-Yutani Corporation
+            Hyrax Corporation
           </h1>
         </NavLink>
         <div className="md:hidden">

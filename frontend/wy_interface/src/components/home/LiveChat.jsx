@@ -10,7 +10,9 @@ const LiveChat = () => {
       >
         {/* header for inside the chatbox */}
         <h2 className="p-5 font-bold bg-emerald-900 text-white rounded-sm text-center">
-          Hello Username. You may enter your deep space message:
+          Hello
+          {/* this will be profile.username once fully implemented */}
+          Username. You may enter your deep space message:
         </h2>
       </div>
     </div>
