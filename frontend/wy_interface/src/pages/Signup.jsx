@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import network from "/icons8-networking-100.png";
+import axios from "axios";
+import { ProfileContext } from "../App";
 
 const Signup = () => {
+  const { profile, setProfile } = useContext(ProfileContext);
   const navigate = useNavigate();
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+    console.log(inputs);
+  };
+
   const formAction = (e) => {
     e.preventDefault();
-    // alert("Redirecting in 3... 2... 1...");
-    setTimeout(() => {
-      console.log("login!");
-      navigate("/home/profile");
-    }, 1000);
+    axios
+      .post("http://localhost:3000/signup", inputs, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setProfile(res.data);
+        navigate("/home/profile");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -31,10 +51,11 @@ const Signup = () => {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+            <form id="user-signup" onSubmit={formAction} className="space-y-6">
+              {/* username */}
               <div>
                 <label
-                  for="email"
+                  htmlFor="username"
                   className="block text-sm font-medium leading-6"
                 >
                   Username
@@ -44,14 +65,17 @@ const Signup = () => {
                     id="username"
                     name="username"
                     type="text"
+                    value={inputs.username || ""}
+                    onChange={handleChange}
                     required
                     className="block w-full  border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
+              {/* email */}
               <div>
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="block text-sm font-medium leading-6 "
                 >
                   Email address
@@ -61,43 +85,37 @@ const Signup = () => {
                     id="email"
                     name="email"
                     type="email"
-                    autocomplete="email"
+                    autoComplete="email"
+                    value={inputs.email || ""}
+                    onChange={handleChange}
                     required
                     className="block w-full  border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
-
+              {/* password */}
               <div>
                 <div className="flex items-center justify-between">
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="block text-sm font-medium leading-6"
                   >
                     Password
                   </label>
-                  {/* This should maybe be removed from sign-up? */}
-                  {/* <div className="text-sm">
-                    <a
-                      href="#"
-                      className="font-semibold text-emerald-400 hover:text-emerald-300"
-                    >
-                      Forgot password?
-                    </a>
-                  </div> */}
                 </div>
                 <div className="mt-2">
                   <input
                     id="password"
                     name="password"
                     type="password"
-                    autocomplete="current-password"
+                    value={inputs.password || ""}
+                    onChange={handleChange}
                     required
                     className="block w-full border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
-
+              {/* submit button */}
               <div>
                 <button
                   type="submit"

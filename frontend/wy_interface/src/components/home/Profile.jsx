@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { ProfileContext } from "../../App";
 
 const Profile = () => {
-  const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState(null);
-  // All of this may be moved to a global context later, this will be for testing!
-  // useEffect(() => {
-  //   setLoading(true);
-  //   fetchData();
-  // }, []);
-  // we'll see if this is needed
+  const { profile, setProfile } = useContext(ProfileContext);
   const PORT = 3000 || 3001;
 
   const fetchData = async () => {

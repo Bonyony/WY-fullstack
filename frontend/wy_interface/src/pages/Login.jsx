@@ -96,7 +96,7 @@ const Login = () => {
                   >
                     Password
                   </label>
-                  {/* This should maybe be removed from sign-up? */}
+                  {/* This should maybe be removed from login? */}
                   <div className="text-sm">
                     <a
                       href="#"
