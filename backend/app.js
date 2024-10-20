@@ -6,21 +6,23 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 // chat depen
 const http = require("http");
-const socketio = require("socket.io");
+const { Server } = require("socket.io");
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;
 
 // express app and cors setup
 const app = express();
+app.use(cors());
+// chat server
 const server = http.createServer(app);
-const io = socketio(server);
+const io = new Server(server);
 // let corsOptions = {
 //   origin: "http://localhost:3000",
 //   optionsSuccessStatus: 200,
 // };
 // app.use(cors(corsOptions));
-app.use(cors());
+
 // connect to the database
 connectToDB();
 
