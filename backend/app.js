@@ -16,12 +16,12 @@ const app = express();
 app.use(cors());
 // chat server
 const server = http.createServer(app);
-const io = new Server(server);
-// let corsOptions = {
-//   origin: "http://localhost:3000",
-//   optionsSuccessStatus: 200,
-// };
-// app.use(cors(corsOptions));
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+  },
+});
 
 // connect to the database
 connectToDB();
@@ -47,8 +47,9 @@ app.get("/", (req, res) => {
 });
 
 // chat
+// need to correct cors problems
 io.on("connection", (socket) => {
-  console.log("New WS Connection...");
+  console.log(`User Connected: ${socket.id}`);
   socket.emit("chat-message", "Hello Me!");
 });
 

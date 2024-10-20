@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { io } from "socket.io-client";
+
+const socket = io.connect("http://localhost:3000");
 
 const LiveChat = () => {
+  const sendMessage = () => {
+    socket.emit();
+  };
+
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center align-middle">
       {/* width needs to be changed, just set at dummy value now */}
@@ -14,7 +21,7 @@ const LiveChat = () => {
           {/* this will be profile.username once fully implemented */}
           Username. You may enter your deep space message:
         </h2>
-        <form id="meesage-form" className="w-full flex flex-row my-2">
+        <form id="message-form" className="w-full flex flex-row my-2">
           <input
             type="text"
             placeholder="Hyraxes are very cool..."
@@ -23,6 +30,7 @@ const LiveChat = () => {
           />
           <button
             type="submit"
+            onSubmit={sendMessage}
             id="send-button"
             className="text-nowrap py-1 px-2 mx-1 rounded bg-emerald-800 hover:bg-emerald-700 text-sm text-white"
           >
