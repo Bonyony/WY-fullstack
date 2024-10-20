@@ -14,6 +14,12 @@ const LiveChat = () => {
           {/* this will be profile.username once fully implemented */}
           Username. You may enter your deep space message:
         </h2>
+        <form id="meesage-form">
+          <input type="text" id="message-input" />
+          <button type="submit" id="send-button">
+            SEND
+          </button>
+        </form>
       </div>
     </div>
   );

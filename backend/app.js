@@ -4,12 +4,17 @@ const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+// chat depen
+const http = require("http");
+const socketio = require("socket.io");
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;
 
 // express app and cors setup
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 // let corsOptions = {
 //   origin: "http://localhost:3000",
 //   optionsSuccessStatus: 200,
@@ -38,6 +43,13 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to frank's sample application." });
 });
+
+// chat
+io.on("connection", (socket) => {
+  console.log("New WS Connection...");
+  socket.emit("chat-message", "Hello Me!");
+});
+
 // routes
 require("./routes/authRoutes")(app);
 require("./routes/userRoutes")(app);
@@ -47,5 +59,5 @@ app.get("/user", (req, res) => {
   res.json(users);
 });
 
-app.listen(port);
+server.listen(port);
 console.log(`Listening on port ${port}`);
