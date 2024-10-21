@@ -1,5 +1,6 @@
 import React, { Suspense, createContext, useState } from "react";
 import "./App.css";
+import "./components/hooks/usePersistedState";
 // components and pages
 import { LiveChat, Buy, Alien, Profile, Loading } from "./components";
 import Landing from "./pages/Landing";
@@ -16,6 +17,7 @@ import {
 } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import HomeLayout from "./layouts/HomeLayout";
+import usePersistedState from "./components/hooks/usePersistedState";
 
 export const ProfileContext = createContext({});
 
@@ -38,7 +40,7 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = usePersistedState(null);
 
   return (
     <>

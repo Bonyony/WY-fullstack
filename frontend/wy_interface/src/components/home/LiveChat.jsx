@@ -5,7 +5,7 @@ const socket = io.connect("http://localhost:3000");
 
 const LiveChat = () => {
   const sendMessage = () => {
-    socket.emit();
+    socket.on("chat-message", [1, 2, 3]);
   };
 
   return (
@@ -16,7 +16,7 @@ const LiveChat = () => {
         className="min-w-[600px] h-screen p-4 mt-20 bg-gray-200 text-black rounded-sm "
       >
         {/* header for inside the chatbox */}
-        <h2 className="p-5 font-bold bg-emerald-800 text-white rounded-sm text-center">
+        <h2 className="px-5 py-1 font-bold bg-emerald-800 text-white rounded-sm text-center">
           Hello
           {/* this will be profile.username once fully implemented */}
           Username. You may enter your deep space message:
@@ -32,7 +32,7 @@ const LiveChat = () => {
             type="submit"
             onSubmit={sendMessage}
             id="send-button"
-            className="text-nowrap py-1 px-2 mx-1 rounded bg-emerald-800 hover:bg-emerald-700 text-sm text-white"
+            className="text-nowrap py-1 px-2 mx-1 rounded bg-gray-500 hover:bg-emerald-600 text-sm text-white"
           >
             Send Message
           </button>

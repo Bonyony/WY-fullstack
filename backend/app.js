@@ -47,20 +47,18 @@ app.get("/", (req, res) => {
 });
 
 // chat
-// need to correct cors problems
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
   socket.emit("chat-message", "Hello Me!");
+  socket.on("thankYou", (data) => {
+    console.log("message from client ", data);
+  });
 });
 
 // routes
 require("./routes/authRoutes")(app);
 require("./routes/userRoutes")(app);
 require("./routes/profileRoutes")(app);
-
-app.get("/user", (req, res) => {
-  res.json(users);
-});
 
 server.listen(port);
 console.log(`Listening on port ${port}`);
