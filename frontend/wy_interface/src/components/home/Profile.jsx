@@ -1,12 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { ProfileContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { profile, setProfile } = useContext(ProfileContext);
+  const navigate = useNavigate();
   const PORT = 3000 || 3001;
 
   console.log(profile);
+  const signOut = () => {
+    setProfile(null);
+    navigate("/");
+    console.log(profile);
+  };
 
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center align-middle">
@@ -28,12 +35,20 @@ const Profile = () => {
           </div>
           <div className="flex flex-row justify-between">
             <p>Preffered space-org: </p>
-            <p>Undefined</p>
+            <p>The Hyrax Consulate</p>
           </div>
           <div className="flex flex-row justify-between">
             <p>Your biography: </p>
             <p>Undefined</p>
           </div>
+        </div>
+        <div className="flex flex-row justify-center w-full">
+          <button
+            className="px-2 py-1 my-2 bg-rose-700 hover:bg-red-600 text-white font-light text-sm rounded-md "
+            onClick={signOut}
+          >
+            SIGN OUT
+          </button>
         </div>
       </div>
     </div>

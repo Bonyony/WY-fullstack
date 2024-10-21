@@ -13,7 +13,7 @@ const LiveChat = () => {
       {/* width needs to be changed, just set at dummy value now */}
       <div
         id="chatbox"
-        className="min-w-[600px] h-screen p-4 mt-20 bg-gray-200 text-black rounded-sm "
+        className="flex flex-col justify-between min-w-[600px] h-screen p-4 mt-20 bg-gray-200 text-black rounded-sm "
       >
         {/* header for inside the chatbox */}
         <h2 className="px-5 py-1 font-bold bg-emerald-800 text-white rounded-sm text-center">
