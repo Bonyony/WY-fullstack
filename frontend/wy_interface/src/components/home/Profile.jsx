@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const { profile, setProfile } = useContext(ProfileContext);
   const navigate = useNavigate();
-  const PORT = 3000 || 3001;
 
   console.log(profile);
   const signOut = () => {
