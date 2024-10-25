@@ -7,6 +7,7 @@ const cookieSession = require("cookie-session");
 // chat depen
 const http = require("http");
 const { Server } = require("socket.io");
+const { addChatUser } = require("./config/chatUser");
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;
@@ -20,6 +21,8 @@ const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
     methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
   },
 });
 
@@ -49,9 +52,9 @@ app.get("/", (req, res) => {
 // chat
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
-  socket.emit("chat-message", "Hello Me!");
-  socket.on("thankYou", (data) => {
-    console.log("message from client ", data);
+
+  socket.on("disconnect", (socket) => {
+    console.log(`User Disconnected: ${socket.id}`);
   });
 });
 
