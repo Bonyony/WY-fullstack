@@ -53,6 +53,15 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
+  socket.on("join", ({ name, room }, callBack) => {
+    const { user, error } = addChatUser({ id: socket.id, name, room });
+
+    if (error) return callBack(error);
+
+    socket.join(user.room);
+    callBack(null);
+  });
+
   socket.on("disconnect", (socket) => {
     console.log(`User Disconnected: ${socket.id}`);
   });

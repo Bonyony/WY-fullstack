@@ -2,10 +2,17 @@ import React, { useContext, useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import { ProfileContext } from "../../App";
 
-const socket = io.connect("http://localhost:3000");
-
 const LiveChat = () => {
   const { profile, setProfile } = useContext(ProfileContext);
+  const [name, setName] = useState("");
+  const [room, setRoom] = useState("");
+
+  useEffect(() => {
+    const { name, room } = queryString.parse(location.search);
+    let socket = io.connect("http://localhost:3000");
+    setRoom(room);
+    setName(name);
+  }, [location.search]);
 
   const sendMessage = () => {
     socket.on("chat-message", [1, 2, 3]);
