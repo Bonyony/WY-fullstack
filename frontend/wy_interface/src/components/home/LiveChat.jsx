@@ -1,21 +1,44 @@
 import React, { useContext, useState, useEffect } from "react";
 import { io } from "socket.io-client";
+import queryString from "query-string";
 import { ProfileContext } from "../../App";
+
+let socket;
 
 const LiveChat = () => {
   const { profile, setProfile } = useContext(ProfileContext);
+
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
 
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
-    let socket = io.connect("http://localhost:3000");
+    socket = io.connect("http://localhost:3000");
     setRoom(room);
     setName(name);
+
+    socket.emit("join", { name, room }, (error) => {
+      if (error) alert(error);
+    });
   }, [location.search]);
 
-  const sendMessage = () => {
-    socket.on("chat-message", [1, 2, 3]);
+  useEffect(() => {
+    socket.on("message", (message) => {
+      setMessages((messages) => [...messages, message]);
+    });
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (message) {
+      socket.emit("sendMessage", { message });
+      setMessage("");
+    } else {
+      alert("empty input");
+    }
   };
 
   return (
@@ -30,7 +53,15 @@ const LiveChat = () => {
           {profile.username}, you may enter your deep space message below:
         </h2>
         {/* messages */}
-        <div className="bg-gray-50 mt-2 w-full h-full rounded-sm"></div>
+        <div className="bg-gray-50 mt-2 w-full h-full rounded-sm">
+          {messages.map((val, i) => {
+            <p key={i}>
+              {val.text}
+              <br />
+              <b>{val.user}</b>
+            </p>;
+          })}
+        </div>
         {/* user message input */}
         <form id="message-form" className="w-full flex flex-row mt-2">
           <input
@@ -41,7 +72,7 @@ const LiveChat = () => {
           />
           <button
             type="submit"
-            onSubmit={sendMessage}
+            onSubmit={handleSubmit}
             id="send-button"
             className="text-nowrap py-1 px-2 ml-1 rounded bg-gray-500 hover:bg-emerald-600 text-sm text-white"
           >
