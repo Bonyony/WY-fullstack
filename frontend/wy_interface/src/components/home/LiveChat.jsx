@@ -14,16 +14,19 @@ const LiveChat = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    const { name, room } = queryString.parse(location.search);
-    socket = io.connect("http://localhost:3000");
-    setRoom(room);
-    setName(name);
+  useEffect(
+    ({ location }) => {
+      const { name, room } = queryString.parse(location.search);
+      socket = io.connect("http://localhost:3000");
+      setRoom(room);
+      setName(name);
 
-    socket.emit("join", { name, room }, (error) => {
-      if (error) alert(error);
-    });
-  }, [location.search]);
+      socket.emit("join", { name, room }, (error) => {
+        if (error) alert(error);
+      });
+    },
+    [location.search]
+  );
 
   useEffect(() => {
     socket.on("message", (message) => {

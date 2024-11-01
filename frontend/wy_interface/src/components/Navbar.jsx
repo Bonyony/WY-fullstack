@@ -7,7 +7,7 @@ const Menu = () => {
     <>
       <ul className="flex flex-row gap-5 orbitron">
         <li className=" hover:text-yellow-200">
-          <NavLink to="/home/chat">Chat Logs</NavLink>
+          <NavLink to="/home/chatselect">Chat Logs</NavLink>
         </li>
         <li className="hover:text-yellow-200">
           <NavLink to="/home/buy">Buy</NavLink>
@@ -27,7 +27,7 @@ const SmallMenu = () => {
   return (
     <ul className="orbitron flex flex-col gap-2 mt-2 text-right mr-2">
       <li className="hover:text-yellow-200">
-        <NavLink to="/home/chat">Chat Logs</NavLink>
+        <NavLink to="/home/chatselect">Chat Logs</NavLink>
       </li>
       <li className="hover:text-yellow-200">
         <NavLink to="/home/buy">Buy</NavLink>
@@ -95,9 +95,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className="hidden md:block">
+        <nav className="hidden md:block">
           <Menu />
-        </div>
+        </nav>
       </div>
     </div>
   );

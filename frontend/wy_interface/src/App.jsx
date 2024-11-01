@@ -2,7 +2,14 @@ import React, { Suspense, createContext, useState } from "react";
 import "./App.css";
 import "./components/hooks/usePersistedState";
 // components and pages
-import { LiveChat, Buy, Alien, Profile, Loading } from "./components";
+import {
+  LiveChat,
+  ChatSelection,
+  Buy,
+  Alien,
+  Profile,
+  Loading,
+} from "./components";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -27,7 +34,9 @@ const router = createBrowserRouter(
       <Route index element={<Landing />} />
 
       <Route path="home" element={<HomeLayout />}>
-        <Route path="chat" element={<LiveChat />} />
+        <Route path="chatselect" element={<ChatSelection />}>
+          <Route path="chat" element={<LiveChat />} />
+        </Route>
         <Route path="buy" element={<Buy />} />
         <Route path="alien" element={<Alien />} />
         <Route path="profile" element={<Profile />} />

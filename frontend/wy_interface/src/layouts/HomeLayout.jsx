@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
   return (
-    <div>
+    <>
       <header>
         <Navbar />
       </header>
@@ -16,7 +16,7 @@ const HomeLayout = () => {
       <footer>
         <Footer />
       </footer>
-    </div>
+    </>
   );
 };
 
