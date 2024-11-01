@@ -8,3 +8,7 @@ exports.addChatUser = ({ id, name, room }) => {
 
   return { chatUser };
 };
+exports.removeChatUser = (id) => {
+  const index = chatUsers.findIndex((user) => user.id === id);
+  return chatUsers[index];
+};

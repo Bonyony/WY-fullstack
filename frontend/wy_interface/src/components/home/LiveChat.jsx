@@ -63,16 +63,21 @@ const LiveChat = () => {
           })}
         </div>
         {/* user message input */}
-        <form id="message-form" className="w-full flex flex-row mt-2">
+        <form
+          id="message-form"
+          onSubmit={handleSubmit}
+          className="w-full flex flex-row mt-2"
+        >
           <input
             type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder="Hyraxes are very cool..."
             id="message-input"
             className="w-full border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 text-sm sm:leading-6"
           />
           <button
             type="submit"
-            onSubmit={handleSubmit}
             id="send-button"
             className="text-nowrap py-1 px-2 ml-1 rounded bg-gray-500 hover:bg-emerald-600 text-sm text-white"
           >
