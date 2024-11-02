@@ -34,9 +34,9 @@ const router = createBrowserRouter(
       <Route index element={<Landing />} />
 
       <Route path="home" element={<HomeLayout />}>
-        <Route path="chatselect" element={<ChatSelection />}>
-          <Route path="chat" element={<LiveChat />} />
-        </Route>
+        <Route path="chatselect" element={<ChatSelection />} />
+        <Route path="chat" location={location} element={<LiveChat />} />
+
         <Route path="buy" element={<Buy />} />
         <Route path="alien" element={<Alien />} />
         <Route path="profile" element={<Profile />} />
@@ -48,7 +48,7 @@ const router = createBrowserRouter(
   )
 );
 
-function App() {
+function App({ location }) {
   const [profile, setProfile] = usePersistedState(null);
 
   return (

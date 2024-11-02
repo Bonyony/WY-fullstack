@@ -2,10 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import queryString from "query-string";
 import { ProfileContext } from "../../App";
+import { useLocation } from "react-router-dom";
 
 let socket;
 
 const LiveChat = () => {
+  let location = useLocation();
+
   const { profile, setProfile } = useContext(ProfileContext);
 
   const [name, setName] = useState("");
@@ -14,19 +17,19 @@ const LiveChat = () => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
-  useEffect(
-    ({ location }) => {
-      const { name, room } = queryString.parse(location.search);
-      socket = io.connect("http://localhost:3000");
-      setRoom(room);
-      setName(name);
+  useEffect(() => {
+    const { name, room } = queryString.parse(location.search);
+    console.log(location.search);
+    console.log(name, room);
 
-      socket.emit("join", { name, room }, (error) => {
-        if (error) alert(error);
-      });
-    },
-    [location.search]
-  );
+    socket = io.connect("http://localhost:3000");
+    setRoom(room);
+    setName(name);
+
+    socket.emit("join", { name, room }, (error) => {
+      if (error) alert(error);
+    });
+  }, [location.search]);
 
   useEffect(() => {
     socket.on("message", (message) => {

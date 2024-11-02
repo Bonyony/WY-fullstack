@@ -20,7 +20,7 @@ const marqueeVariants = {
 const Marquee = () => {
   return (
     <div>
-      <div className="marquee orbitron">
+      <div className="marquee orbitron cursor-default">
         {/* 3. Using framer motion */}
         <motion.div
           className="track"
