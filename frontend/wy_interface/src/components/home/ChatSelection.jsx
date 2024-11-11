@@ -9,7 +9,7 @@ const ChatSelection = () => {
     <section className="h-screen w-full flex flex-col items-center justify-center align-middle">
       <div className="flex flex-col items-center gap-2 bg-cyan-950 p-8 rounded-lg outline outline-gray-300">
         <h1 className="font-bold">Select a Chat Room...</h1>
-        <div className=" min-w-fit">
+        <div className="flex flex-col gap-3 min-w-fit">
           <input
             className="w-full border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 text-sm sm:leading-6"
             placeholder="Name"

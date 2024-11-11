@@ -29,7 +29,7 @@ const LiveChat = () => {
     socket.emit("join", { name, room }, (error) => {
       if (error) alert(error);
     });
-  }, [location.search]);
+  }, ["http://localhost:3000", location.search]);
 
   useEffect(() => {
     socket.on("message", (message) => {
@@ -41,6 +41,7 @@ const LiveChat = () => {
     e.preventDefault();
     if (message) {
       socket.emit("sendMessage", { message });
+      console.log(message);
       setMessage("");
     } else {
       alert("empty input");

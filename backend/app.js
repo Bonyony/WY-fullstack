@@ -7,7 +7,12 @@ const cookieSession = require("cookie-session");
 // chat depen
 const http = require("http");
 const { Server } = require("socket.io");
-const { addChatUser, removeChatUser } = require("./config/chatUser");
+const {
+  addChatUser,
+  removeChatUser,
+  getChatUser,
+  getChatUsersInRoom,
+} = require("./config/chatUser");
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;
@@ -67,22 +72,28 @@ io.on("connection", (socket) => {
       .to(user.room)
       .emit("message", { user: "Admin", text: `${user.name} has joined!` });
     callBack(null);
+  });
 
-    socket.on("sendMessage", ({ message }) => {
-      io.to(user.room).emit("message", {
-        user: user.name,
-        text: message,
-      });
+  socket.on("sendMessage", (message, callback) => {
+    const user = getChatUser(socket.id);
+    io.to(user.room).emit("message", {
+      user: user.name,
+      text: message,
     });
+    callback();
   });
 
   socket.on("disconnect", (socket) => {
-    const user = removeUser(socket.id);
+    const user = removeChatUser(socket.id);
     console.log(user);
-    io.to(user.room).emit("message", {
-      user: "Admin",
-      text: `${user.name} just left the room`,
-    });
+
+    if (user) {
+      io.to(user.room).emit("message", {
+        user: "Admin",
+        text: `${user.name} just left the room`,
+      });
+    }
+
     console.log("A disconnection has been made");
   });
 });
