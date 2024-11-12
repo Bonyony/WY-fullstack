@@ -40,9 +40,8 @@ const LiveChat = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (message) {
-      socket.emit("sendMessage", { message });
-      console.log(message);
-      setMessage("");
+      socket.emit("sendMessage", message, () => setMessage(""));
+      console.log(message, ...messages);
     } else {
       alert("empty input");
     }
