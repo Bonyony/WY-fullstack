@@ -4,7 +4,7 @@ exports.addChatUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
 
-  const existingChatUser = users.find(
+  const existingChatUser = chatUsers.find(
     (user) => user.room === room && user.name === name
   );
 

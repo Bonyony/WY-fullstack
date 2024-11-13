@@ -26,7 +26,6 @@ const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
     methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
     credentials: true,
   },
 });
@@ -55,7 +54,7 @@ app.get("/", (req, res) => {
 });
 
 // chat
-io.on("connection", (socket) => {
+io.on("connect", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("join", ({ name, room }, callBack) => {
