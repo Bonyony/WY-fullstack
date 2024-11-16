@@ -22,7 +22,9 @@ const LiveChat = () => {
     console.log(location.search);
     console.log(name, room);
 
-    socket = io.connect("http://localhost:3000");
+    socket = io.connect("http://localhost:3000", {
+      withCredentials: true,
+    });
     setRoom(room);
     setName(name);
 
