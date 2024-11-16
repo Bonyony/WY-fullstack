@@ -6,6 +6,7 @@ const cors = require("cors");
 const cookieSession = require("cookie-session");
 // chat depen
 const http = require("http");
+// const { Server } = require("socket.io");
 const { Server } = require("socket.io");
 const {
   addChatUser,
@@ -16,18 +17,27 @@ const {
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;
-
+const allowedOrigins = process.env.FRONTEND_URL || "http://localhost:5173";
 // express app and cors setup
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 // chat server
 const server = http.createServer(app);
+// const io = socketIO(server);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
     credentials: true,
   },
 });
+
+app.options("*", cors());
 
 // connect to the database
 connectToDB();
@@ -57,27 +67,39 @@ io.on("connect", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("join", ({ name, room }, callBack) => {
-    const { user, error } = addChatUser({ id: socket.id, name, room });
+    const { chatUser, error } = addChatUser({ id: socket.id, name, room });
+
     if (error) return callBack(error);
+    if (chatUser) {
+      socket.join(chatUser.room);
+      socket.emit("message", {
+        user: "Admin",
+        text: `Welcome to ${chatUser.room}`,
+      });
 
-    socket.join(user.room);
-    socket.emit("message", {
-      user: "Admin",
-      text: `Welocome to ${user.room}`,
-    });
-
-    socket.broadcast
-      .to(user.room)
-      .emit("message", { user: "Admin", text: `${user.name} has joined!` });
-    callBack(null);
+      socket.broadcast.to(chatUser.room).emit("message", {
+        user: "Admin",
+        text: `${chatUser.name} has joined!`,
+      });
+      callBack(null);
+    } else {
+      callBack("Failed to join room");
+    }
   });
 
   socket.on("sendMessage", (message, callback) => {
     const user = getChatUser(socket.id);
+
+    if (!user) {
+      console.error(`User not found for socket ID: ${socket.id}`);
+      return callback("User not found");
+    }
+
     io.to(user.room).emit("message", {
       user: user.name,
       text: message,
     });
+
     callback();
   });
 

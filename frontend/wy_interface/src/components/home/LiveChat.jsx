@@ -9,7 +9,7 @@ let socket;
 const LiveChat = () => {
   let location = useLocation();
 
-  const { profile, setProfile } = useContext(ProfileContext);
+  const { profile } = useContext(ProfileContext);
 
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
@@ -22,21 +22,30 @@ const LiveChat = () => {
     console.log(location.search);
     console.log(name, room);
 
-    socket = io.connect("http://localhost:3000", {
+    socket = io("http://localhost:3000", {
       withCredentials: true,
     });
+
     setRoom(room);
     setName(name);
 
     socket.emit("join", { name, room }, (error) => {
       if (error) alert(error);
     });
-  }, ["http://localhost:3000", location.search]);
+
+    return () => {
+      socket.disconnect(); // Cleanup on unmount
+    };
+  }, [location.search]);
 
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
+
+    return () => {
+      socket.off("message"); // Clean up the listener
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -45,7 +54,7 @@ const LiveChat = () => {
       socket.emit("sendMessage", message, () => setMessage(""));
       console.log(message, ...messages);
     } else {
-      alert("empty input");
+      alert("Empty Input");
     }
   };
 
@@ -62,13 +71,11 @@ const LiveChat = () => {
         </h2>
         {/* messages */}
         <div className="bg-gray-50 mt-2 w-full h-full rounded-sm">
-          {messages.map((val, i) => {
+          {messages.map((val, i) => (
             <p key={i}>
-              {val.text}
-              <br />
-              <b>{val.user}</b>
-            </p>;
-          })}
+              <b>{val.user}:</b> {val.text}
+            </p>
+          ))}
         </div>
         {/* user message input */}
         <form
