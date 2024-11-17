@@ -4,16 +4,9 @@ const dotenv = require("dotenv").config();
 const logger = require("morgan");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-// chat depen
+// chat dependencies
 const http = require("http");
-// const { Server } = require("socket.io");
 const { Server } = require("socket.io");
-// const {
-//   addChatUser,
-//   removeChatUser,
-//   getChatUser,
-//   getChatUsersInRoom,
-// } = require("./config/chatUser");
 
 const connectToDB = require("./config/db");
 const port = process.env.PORT || 3000;
@@ -28,7 +21,6 @@ app.use(
 );
 // chat server
 const server = http.createServer(app);
-// const io = socketIO(server);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
@@ -61,9 +53,8 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to frank's sample application." });
 });
-
+// chat logic call
 require("./config/socket")(io);
-
 // routes
 require("./routes/authRoutes")(app);
 require("./routes/userRoutes")(app);

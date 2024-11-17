@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import queryString from "query-string";
 import { ProfileContext } from "../../App";
 import { useLocation } from "react-router-dom";
+import ChatMessages from "./socketIO/ChatMessages";
 
 let socket;
 
@@ -13,8 +14,9 @@ const LiveChat = () => {
 
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
-
+  // array of messages
   const [messages, setMessages] = useState([]);
+  // current message value
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -70,13 +72,14 @@ const LiveChat = () => {
           {profile.username}, you may enter your deep space message below:
         </h2>
         {/* messages */}
-        <div className="bg-gray-50 mt-2 w-full h-full rounded-sm">
+        <ChatMessages messages={messages} name={name} />
+        {/* <div className="bg-gray-50 mt-2 w-full h-full rounded-sm">
           {messages.map((val, i) => (
             <p key={i}>
               <b>{val.user}:</b> {val.text}
             </p>
           ))}
-        </div>
+        </div> */}
         {/* user message input */}
         <form
           id="message-form"
