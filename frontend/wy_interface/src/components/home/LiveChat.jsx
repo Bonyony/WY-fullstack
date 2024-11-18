@@ -3,7 +3,9 @@ import { io } from "socket.io-client";
 import queryString from "query-string";
 import { ProfileContext } from "../../App";
 import { useLocation } from "react-router-dom";
+
 import ChatMessages from "./socketIO/ChatMessages";
+import UserInfo from "./socketIO/UserInfo";
 
 let socket;
 
@@ -14,6 +16,7 @@ const LiveChat = () => {
 
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const [users, setUsers] = useState([]);
   // array of messages
   const [messages, setMessages] = useState([]);
   // current message value
@@ -45,6 +48,10 @@ const LiveChat = () => {
       setMessages((messages) => [...messages, message]);
     });
 
+    socket.on("roomData", ({ users }) => {
+      setUsers(users);
+    });
+
     return () => {
       socket.off("message"); // Clean up the listener
     };
@@ -61,11 +68,11 @@ const LiveChat = () => {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center align-middle">
+    <div className="flex md:flex-row flex-col h-screen items-center justify-center">
       {/* width needs to be changed, just set at dummy value now */}
       <div
         id="chatbox-container"
-        className="flex flex-col justify-between w-full max-w-[900px] h-screen p-4 mt-16 bg-gray-300 text-black rounded-sm "
+        className="flex flex-col justify-between w-full max-w-[900px] p-4 mt-16 bg-gray-200 text-black rounded-sm "
       >
         {/* header for inside the chatbox */}
         <h2 className="px-5 py-1 font-bold bg-emerald-800 text-white rounded-sm text-center">
@@ -73,13 +80,6 @@ const LiveChat = () => {
         </h2>
         {/* messages */}
         <ChatMessages messages={messages} name={name} />
-        {/* <div className="bg-gray-50 mt-2 w-full h-full rounded-sm">
-          {messages.map((val, i) => (
-            <p key={i}>
-              <b>{val.user}:</b> {val.text}
-            </p>
-          ))}
-        </div> */}
         {/* user message input */}
         <form
           id="message-form"
@@ -103,6 +103,7 @@ const LiveChat = () => {
           </button>
         </form>
       </div>
+      <UserInfo users={users} />
     </div>
   );
 };

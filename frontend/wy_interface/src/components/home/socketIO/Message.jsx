@@ -10,18 +10,21 @@ const Message = ({ message: { text, user }, name }) => {
   }
 
   return isSentByCurrentUser ? (
-    <div className="">
-      <p className="">{trimmedName}</p>
-      <div className="">
-        <p className="">{text}</p>
+    // user (you)
+    <div className="flex gap-2 justify-end  mt-3 mr-2">
+      <b className="text-xs">{name}</b>
+
+      <div className="rounded-xl px-3 py-1 bg-emerald-800 text-white inline-block max-w-[4/5]">
+        <p className="w-full float-left break-words">{text}</p>
       </div>
     </div>
   ) : (
-    <div className="">
-      <div className="">
-        <p className="">{text}</p>
+    // other user
+    <div className="flex gap-2 justify-start  mt-3 ml-2">
+      <div className="rounded-xl px-3 py-1 bg-slate-700 text-white inline-block max-w-[4/5]">
+        <p className="w-full float-left break-words">{text}</p>
       </div>
-      <p className="">{user}</p>
+      <b className="text-xs">{user}</b>
     </div>
   );
 };
