@@ -1,17 +1,18 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 import "../styles/marquee.css";
 
 // still kind of choppy :(
 const marqueeVariants = {
   animate: {
-    x: [0, -1500],
+    x: [0, -6400],
     transition: {
       x: {
         repeat: Infinity,
         repeatType: "loop",
-        duration: 15,
+        duration: 55,
         ease: "linear",
+        // delay: 2,
       },
     },
   },
@@ -28,9 +29,8 @@ const Marquee = () => {
           animate="animate"
         >
           <h1>
-            We are watching. We are watching. We are watching. We are watching.
-            We are watching. We are watching. We are watching. We are watching.
-            We are watching. We are watching. We are watching. We are watching.
+            We are watching. The Hyraxes are watching. We are waiting. I am
+            watching. Frank is watching. Do you see me? We are watching.
           </h1>
         </motion.div>
       </div>

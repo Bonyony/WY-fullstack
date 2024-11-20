@@ -17,12 +17,12 @@ module.exports = (io) => {
       if (chatUser) {
         socket.join(chatUser.room);
         socket.emit("message", {
-          user: "Admin",
+          user: "The Raxmaster",
           text: `Welcome to ${chatUser.room}`,
         });
 
         socket.broadcast.to(chatUser.room).emit("message", {
-          user: "Admin",
+          user: "The Raxmaster",
           text: `${chatUser.name} has joined!`,
         });
         callBack(null);
@@ -53,7 +53,7 @@ module.exports = (io) => {
 
       if (user) {
         io.to(user.room).emit("message", {
-          user: "Admin",
+          user: "The Raxmaster",
           text: `${user.name} just left the room`,
         });
       }
