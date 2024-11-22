@@ -72,10 +72,10 @@ const LiveChat = () => {
       {/* width needs to be changed, just set at dummy value now */}
       <div
         id="chatbox-container"
-        className="flex flex-col justify-between w-full max-w-[600px] p-4 mt-16 bg-gray-200 text-black rounded-sm "
+        className="flex flex-col justify-between w-full max-w-[600px] p-4 mt-16 bg-slate-800 text-black rounded-sm "
       >
         {/* header for inside the chatbox */}
-        <h2 className="px-5 py-1 font-bold bg-emerald-800 text-white rounded-sm text-center">
+        <h2 className="px-5 py-1 font-bold bg-slate-700 text-white rounded-sm text-center">
           {profile.username}, you may enter your deep space message below:
         </h2>
         {/* messages */}
