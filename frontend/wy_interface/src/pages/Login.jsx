@@ -13,7 +13,6 @@ const Login = () => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
-    console.log(inputs);
   };
 
   // this form action should only fire if the profile returns 200
