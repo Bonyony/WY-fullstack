@@ -1,8 +1,6 @@
 import React from "react";
 
 const UserInfo = ({ users }) => {
-  console.log(users);
-
   return (
     <div className="bg-gray-200 text-black p-2 rounded-r-md">
       <h2 className="font-bold">INFO</h2>

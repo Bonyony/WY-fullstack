@@ -11,17 +11,17 @@ const Message = ({ message: { text, user }, name }) => {
 
   return isSentByCurrentUser ? (
     // user (you)
-    <div className="flex gap-2 justify-end  mt-3 mr-2">
+    <div className="flex gap-2 justify-end  mb-2 mt-1 mr-2">
       <b className="text-xs text-emerald-500">{name}</b>
 
-      <div className="rounded-xl rounded-br-none px-3 py-1 bg-emerald-900 text-white inline-block max-w-[4/5]">
+      <div className="rounded-xl rounded-br-none px-3 py-1 max-w-[300px] bg-emerald-900 text-white inline-block text-wrap">
         <p className="w-full float-left break-words">{text}</p>
       </div>
     </div>
   ) : (
     // other user
-    <div className="flex gap-2 justify-start  mt-3 ml-2">
-      <div className="rounded-xl rounded-bl-none px-3 py-1 bg-slate-700 text-white inline-block max-w-[4/5]">
+    <div className="flex gap-2 justify-start  mb-2 mt-1 ml-2">
+      <div className="rounded-xl rounded-bl-none px-3 py-1 max-w-[300px] bg-slate-700 text-white inline-block text-wrap">
         <p className="w-full float-left break-words">{text}</p>
       </div>
       <b className="text-xs text-yellow-500">{user}</b>

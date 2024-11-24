@@ -44,13 +44,24 @@ const LiveChat = () => {
   }, [location.search]);
 
   useEffect(() => {
+    const fetchUsersInRoom = () => {
+      socket.emit("getUsers", room, (users) => {
+        console.log("Users in room:", users);
+        setUsers(users);
+      });
+    };
+
+    fetchUsersInRoom();
+  }, [room]);
+
+  useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
 
-    socket.on("roomData", ({ users }) => {
-      setUsers(users);
-    });
+    // socket.on("roomData", ({ users }) => {
+    //   setUsers(users);
+    // });
 
     return () => {
       socket.off("message"); // Clean up the listener

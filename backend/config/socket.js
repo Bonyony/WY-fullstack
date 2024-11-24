@@ -47,6 +47,12 @@ module.exports = (io) => {
       callback();
     });
 
+    socket.on("getUsers", (room, callBack) => {
+      const roomData = getChatUsersInRoom(room);
+      console.log(roomData);
+      callBack(roomData);
+    });
+
     socket.on("disconnect", (socket) => {
       const user = removeChatUser(socket.id);
       console.log(user);
