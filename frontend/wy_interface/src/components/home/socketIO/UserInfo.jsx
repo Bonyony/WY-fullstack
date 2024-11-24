@@ -1,17 +1,17 @@
 import React from "react";
 
-const UserInfo = ({ users }) => {
+const UserInfo = ({ users, room }) => {
   return (
     <div className="bg-gray-200 text-black p-2 rounded-r-md">
       <h2 className="font-bold">INFO</h2>
       {users ? (
         <div>
-          <h3>Users currently chatting:</h3>
-          <h4>
-            {users.map(({ name }) => {
-              <p key={name}>{name}</p>;
+          <h3>Users currently chatting in {room}:</h3>
+          <ul>
+            {users.map((user, index) => {
+              <li key={index}>{user}</li>;
             })}
-          </h4>
+          </ul>
         </div>
       ) : null}
     </div>

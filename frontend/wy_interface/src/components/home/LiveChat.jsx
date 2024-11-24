@@ -38,30 +38,30 @@ const LiveChat = () => {
       if (error) alert(error);
     });
 
+    socket.on("roomUsersUpdated", (updatedUsers) => {
+      setUsers(updatedUsers);
+    });
+
     return () => {
       socket.disconnect(); // Cleanup on unmount
     };
   }, [location.search]);
 
-  useEffect(() => {
-    const fetchUsersInRoom = () => {
-      socket.emit("getUsers", room, (users) => {
-        console.log("Users in room:", users);
-        setUsers(users);
-      });
-    };
+  // useEffect(() => {
+  //   const fetchUsersInRoom = () => {
+  //     socket.emit("getUsers", room, (users) => {
+  //       console.log("Users in room:", users);
+  //       setUsers(users);
+  //     });
+  //   };
 
-    fetchUsersInRoom();
-  }, [room]);
+  //   fetchUsersInRoom();
+  // }, [room]);
 
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
     });
-
-    // socket.on("roomData", ({ users }) => {
-    //   setUsers(users);
-    // });
 
     return () => {
       socket.off("message"); // Clean up the listener
@@ -114,7 +114,7 @@ const LiveChat = () => {
           </button>
         </form>
       </div>
-      <UserInfo users={users} />
+      <UserInfo users={users} room={room} />
     </div>
   );
 };

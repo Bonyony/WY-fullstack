@@ -25,6 +25,11 @@ module.exports = (io) => {
           user: "The Raxmaster",
           text: `${chatUser.name} has joined!`,
         });
+        // const updateUsersInRoom = (room) => {
+        //   const usersInRoom = getChatUsersInRoom(room).map((user) => user.name); // Extract usernames
+        //   io.to(room).emit("roomUsersUpdated", usersInRoom);
+        // };
+        // updateUsersInRoom(chatUser.room);
         callBack(null);
       } else {
         callBack("Failed to join room");
@@ -49,7 +54,7 @@ module.exports = (io) => {
 
     socket.on("getUsers", (room, callBack) => {
       const roomData = getChatUsersInRoom(room);
-      console.log(roomData);
+      console.log(roomData, "FrankJumbo2");
       callBack(roomData);
     });
 
