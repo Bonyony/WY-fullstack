@@ -38,7 +38,9 @@ exports.addChatUser = ({ id, name, room }) => {
   return { chatUser };
 };
 exports.removeChatUser = (id) => chatUsers.delete(id);
+
 exports.getChatUser = (id) => chatUsers.get(id);
+
 exports.getChatUsersInRoom = (room) =>
   [...chatUsers.values()]
     .filter((user) => user.room === room)

@@ -18,18 +18,19 @@ module.exports = (io) => {
         socket.join(chatUser.room);
         socket.emit("message", {
           user: "The Raxmaster",
-          text: `Welcome to ${chatUser.room}`,
+          text: `Welcome to ${chatUser.room.toUpperCase()}`,
         });
 
         socket.broadcast.to(chatUser.room).emit("message", {
           user: "The Raxmaster",
-          text: `${chatUser.name} has joined!`,
+          text: `${chatUser.name.toUpperCase()} has joined!`,
         });
-        // const updateUsersInRoom = (room) => {
-        //   const usersInRoom = getChatUsersInRoom(room).map((user) => user.name); // Extract usernames
-        //   io.to(room).emit("roomUsersUpdated", usersInRoom);
-        // };
-        // updateUsersInRoom(chatUser.room);
+
+        io.to(chatUser.room).emit("roomData", {
+          room: chatUser.room,
+          users: getChatUsersInRoom(chatUser.room),
+        });
+
         callBack(null);
       } else {
         callBack("Failed to join room");
@@ -52,12 +53,6 @@ module.exports = (io) => {
       callback();
     });
 
-    socket.on("getUsers", (room, callBack) => {
-      const roomData = getChatUsersInRoom(room);
-      console.log(roomData, "FrankJumbo2");
-      callBack(roomData);
-    });
-
     socket.on("disconnect", (socket) => {
       const user = removeChatUser(socket.id);
       console.log(user);
@@ -65,7 +60,12 @@ module.exports = (io) => {
       if (user) {
         io.to(user.room).emit("message", {
           user: "The Raxmaster",
-          text: `${user.name} just left the room`,
+          text: `${user.name.toUpperCase()} just left the room`,
+        });
+
+        io.to(user.room).emit("roomData", {
+          room: user.room,
+          users: getChatUsersInRoom(user.room),
         });
       }
 
