@@ -27,6 +27,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
     credentials: true,
   },
+  connectionStateRecovery: {},
 });
 
 app.options("*", cors());

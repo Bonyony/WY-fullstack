@@ -53,20 +53,25 @@ module.exports = (io) => {
       callback();
     });
 
-    socket.on("disconnect", (socket) => {
-      const user = removeChatUser(socket.id);
-      console.log(user);
+    socket.on("disconnect", () => {
+      const user = getChatUser(socket.id);
+
+      // add an error handler
 
       if (user) {
+        removeChatUser(user);
+
         io.to(user.room).emit("message", {
           user: "The Raxmaster",
-          text: `${user.name.toUpperCase()} just left the room`,
+          text: `${user.name.toUpperCase()} has left ${user.room.toUpperCase()}`,
         });
 
         io.to(user.room).emit("roomData", {
           room: user.room,
           users: getChatUsersInRoom(user.room),
         });
+
+        console.log(getChatUsersInRoom(user.room));
       }
 
       console.log("A disconnection has been made");
