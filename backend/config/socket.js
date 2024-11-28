@@ -3,12 +3,15 @@ const {
   removeChatUser,
   getChatUser,
   getChatUsersInRoom,
+  getAvailableRooms,
 } = require("./chatUser");
 
 module.exports = (io) => {
   // chat
   io.on("connect", (socket) => {
     console.log(`User Connected: ${socket.id}`);
+
+    socket.emit("availableRooms", getAvailableRooms());
 
     socket.on("join", ({ name, room }, callBack) => {
       const { chatUser, error } = addChatUser({ id: socket.id, name, room });

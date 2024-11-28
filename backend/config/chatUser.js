@@ -1,5 +1,12 @@
 let chatUsers = new Map();
 const MAX_USERS_PER_ROOM = 20;
+const AVAILABLE_ROOMS = [
+  "Raxstation 1",
+  "Hyrax Hell",
+  "Funroom",
+  "Possum-ship",
+  "Ice Castle",
+];
 
 exports.addChatUser = ({ id, name, room }) => {
   console.log("Adding chat user:", { id, name, room });
@@ -11,10 +18,21 @@ exports.addChatUser = ({ id, name, room }) => {
     return { error: "name and room required." };
   }
 
+  if (
+    !AVAILABLE_ROOMS.some(
+      (availableRoom) => availableRoom.toLowerCase() === room
+    )
+  ) {
+    console.error("Error: Invalid room.");
+    return { error: "Invalid room. Please select a valid room." };
+  }
+
   const usersInRoom = [...chatUsers.values()].filter(
     (user) => user.room === room
   );
+
   console.log(usersInRoom);
+
   if (usersInRoom.length > MAX_USERS_PER_ROOM) {
     console.error("Error: Room is full.");
     return { error: "Room is full. Please choose another room." };
@@ -45,3 +63,5 @@ exports.getChatUsersInRoom = (room) =>
   [...chatUsers.values()]
     .filter((user) => user.room === room)
     .map((user) => user.name);
+
+exports.getAvailableRooms = () => AVAILABLE_ROOMS;

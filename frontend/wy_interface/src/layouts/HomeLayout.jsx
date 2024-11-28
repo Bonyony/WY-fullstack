@@ -7,12 +7,6 @@ const HomeLayout = () => {
     <>
       <header>
         <Navbar />
-        <div className="w-auto bg-white h-14 overflow-hidden flex flex-row justify-center">
-          {/* <div className="h-14 w-24  bg-black"></div>
-          <div className="h-14 w-20  bg-gray-400"></div>
-          <div className="h-14 w-20  bg-red-400"></div>
-          <div className="h-14 w-24  bg-black"></div> */}
-        </div>
       </header>
       <main>
         <Outlet />
