@@ -73,11 +73,11 @@ const LiveChat = () => {
   };
 
   return (
-    <div className="flex md:flex-row flex-col h-screen items-center justify-center">
+    <div className="flex md:flex-row flex-col items-center justify-center">
       {/* width needs to be changed, just set at dummy value now */}
       <div
         id="chatbox-container"
-        className="flex flex-col justify-between w-full max-w-[600px] p-4 mt-16 bg-slate-800 text-black rounded-sm "
+        className="flex flex-col justify-between w-full max-w-[600px] p-4 mt-2 bg-slate-800 text-black rounded-sm "
       >
         {/* header for inside the chatbox */}
         <h2 className="px-5 py-1 font-bold bg-slate-700 text-white rounded-sm text-center">

@@ -56,10 +56,8 @@ module.exports = (io) => {
     socket.on("disconnect", () => {
       const user = getChatUser(socket.id);
 
-      // add an error handler
-
       if (user) {
-        removeChatUser(user);
+        removeChatUser(socket.id);
 
         io.to(user.room).emit("message", {
           user: "The Raxmaster",
