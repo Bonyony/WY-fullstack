@@ -17,7 +17,7 @@ const Profile = () => {
     <div className="h-screen w-full flex flex-col items-center justify-center align-middle">
       <div
         id="profile-card"
-        className="p-4 mt-20 h-screen bg-slate-800 text-white rounded-sm"
+        className="p-4 h-screen bg-slate-800 text-white rounded-sm"
       >
         <h2 className="text-xl font-black mb-2">
           Welcome {profile.username}, please review our data-banks

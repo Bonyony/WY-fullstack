@@ -20,6 +20,7 @@ const ChatSelection = () => {
     socket.emit("getAvailableRooms"); // Request rooms from the server on mount
 
     socket.on("availableRooms", (rooms) => {
+      console.log("Rooms received:", rooms);
       setAvailableRooms(rooms);
     });
 
