@@ -7,11 +7,15 @@ const Menu = () => {
     <>
       <ul className="flex flex-row gap-5 orbitron">
         <li className=" hover:text-yellow-200">
+          <NavLink to="/home/dashboard">Dashboard</NavLink>
+        </li>
+        <li className=" hover:text-yellow-200">
           <NavLink to="/home/chatselect">Chat Logs</NavLink>
         </li>
-        <li className="hover:text-yellow-200">
+        {/* Component not needed as of now, but I may change my mind */}
+        {/* <li className="hover:text-yellow-200">
           <NavLink to="/home/buy">Buy</NavLink>
-        </li>
+        </li> */}
         <li className="hover:text-yellow-200">
           <NavLink to="/home/alien">Aliens</NavLink>
         </li>
@@ -26,12 +30,16 @@ const Menu = () => {
 const SmallMenu = () => {
   return (
     <ul className="orbitron flex flex-col gap-2 mt-2 text-right mr-2">
+      <li className=" hover:text-yellow-200">
+        <NavLink to="/home/dashboard">Dashboard</NavLink>
+      </li>
       <li className="hover:text-yellow-200">
         <NavLink to="/home/chatselect">Chat Logs</NavLink>
       </li>
-      <li className="hover:text-yellow-200">
+      {/* Component not needed as of now, but I may change my mind */}
+      {/* <li className="hover:text-yellow-200">
         <NavLink to="/home/buy">Buy</NavLink>
-      </li>
+      </li> */}
       <li className="hover:text-yellow-200">
         <NavLink to="/home/alien">Aliens</NavLink>
       </li>

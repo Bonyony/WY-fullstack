@@ -9,6 +9,7 @@ import {
   Alien,
   Profile,
   Loading,
+  Dashboard,
 } from "./components";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -34,9 +35,12 @@ const router = createBrowserRouter(
       <Route index element={<Landing />} />
 
       <Route path="home" element={<HomeLayout />}>
+        {/* component to give some stats/options */}
+        <Route path="dashboard" element={<Dashboard />} />
+        {/* Chat Components */}
         <Route path="chatselect" element={<ChatSelection />} />
         <Route path="chat" location={location} element={<LiveChat />} />
-
+        {/* Other Components */}
         <Route path="buy" element={<Buy />} />
         <Route path="alien" element={<Alien />} />
         <Route path="profile" element={<Profile />} />
