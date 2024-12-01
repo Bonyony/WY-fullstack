@@ -56,6 +56,9 @@ const ChatSelection = () => {
               onChange={(e) => setRoom(e.target.value)}
               required
             >
+              <option value="" disabled>
+                Select a room
+              </option>
               {availableRooms.map((room) => (
                 <option key={room} value={room}>
                   {room.toUpperCase()}

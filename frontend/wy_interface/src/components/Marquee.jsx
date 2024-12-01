@@ -30,7 +30,7 @@ const Marquee = () => {
         >
           <h1>
             We are watching. The Hyraxes are watching. We are waiting. I am
-            watching. Frank is watching. Do you see me? We are watching.
+            watching. Hi Mom. Frank is watching. Do you see me? We are watching.
           </h1>
         </motion.div>
       </div>
