@@ -16,6 +16,10 @@ const Dashboard = () => {
           className="flex flex-col justify-between items-center px-8 py-6 bg-slate-800 rounded-md md:min-h-[400px]"
         >
           <h2 className="text-center text-lg font-semibold">Rax-Chat</h2>
+          <p>
+            Join a fun chat room to speak with other people! Doesn't that sound
+            like fun? NO!? Then just wait here for Frank to add more features...
+          </p>
           <Link
             className="px-2 py-1 bg-slate-600 rounded-md hover:bg-slate-500 max-w-[200px]"
             to="/home/chatselect"
@@ -28,8 +32,13 @@ const Dashboard = () => {
           className="flex flex-col justify-between items-center px-8 py-6 bg-slate-800 rounded-md md:min-h-[400px]"
         >
           <h2 className="text-center text-lg font-semibold">
-            Hyrax Corporation Bulletein
+            Hyrax Corporation Bulletin
           </h2>
+          <p>Employees of the Year</p>
+          <img
+            src="/public/Hyrax-6891.jpg"
+            alt="Employees of the Year, (Linda, Johnny, Fran, Zurple, Billy, and Mango)"
+          />
           <Link
             className="px-2 py-1 bg-slate-600 rounded-md hover:bg-slate-500 max-w-[200px]"
             to="/home/alien"
@@ -44,6 +53,10 @@ const Dashboard = () => {
           <h2 className="text-center text-lg font-semibold">
             View Your Profile
           </h2>
+          <p>
+            View your very own profile! Data and numbers and things. Oh and your
+            personal biography! Very quaint.
+          </p>
           <Link
             className="px-2 py-1 bg-slate-600 rounded-md hover:bg-slate-500 max-w-[200px]"
             to="/home/profile"

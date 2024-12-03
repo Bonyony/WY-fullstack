@@ -3,14 +3,16 @@ import { delay, motion } from "framer-motion";
 import "../styles/marquee.css";
 
 // still kind of choppy :(
+// Perhaps have the x values be
+// set with window parameters from the DOM?
 const marqueeVariants = {
   animate: {
-    x: [0, -6400],
+    x: [1500, -8500],
     transition: {
       x: {
         repeat: Infinity,
         repeatType: "loop",
-        duration: 55,
+        duration: 85,
         ease: "linear",
         // delay: 2,
       },

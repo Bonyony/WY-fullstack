@@ -28,7 +28,7 @@ const Login = () => {
       .then((res) => {
         console.log(res.data);
         setProfile(res.data);
-        navigate("/home/profile");
+        navigate("/home/dashboard");
       })
       .catch((err) => console.log(err));
   };

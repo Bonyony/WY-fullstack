@@ -4,6 +4,11 @@ import network from "/icons8-networking-100.png";
 import axios from "axios";
 import { ProfileContext } from "../App";
 
+// Need to update this page to include Schema info,
+// i.e. Username is between 2 and 30 characters
+// Password is between 8 and 30 characters. Also
+// should have this only pop up white the input box is active
+
 const Signup = () => {
   const { profile, setProfile } = useContext(ProfileContext);
   const navigate = useNavigate();
@@ -28,7 +33,7 @@ const Signup = () => {
       .then((res) => {
         console.log(res.data);
         setProfile(res.data);
-        navigate("/home/profile");
+        navigate("/home/dashboard");
       })
       .catch((err) => console.log(err));
   };

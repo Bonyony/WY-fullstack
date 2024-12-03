@@ -4,7 +4,7 @@ import network from "/icons8-networking-100.png";
 const Footer = () => {
   return (
     <>
-      <div className="px-2 py-4 text-yellow-200 flex flex-col items-center justify-evenly gap-5">
+      <div className=" px-2 py-4 text-yellow-200 flex flex-col items-center justify-evenly gap-5">
         <img
           src={network}
           alt="Structures of Data"
