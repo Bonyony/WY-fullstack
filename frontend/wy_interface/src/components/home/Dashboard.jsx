@@ -38,9 +38,12 @@ const Dashboard = () => {
             Hyrax Corporation Bulletin
           </h2>
           <div className="card-body">
-            <p>Employees of the Year</p>
+            <p>
+              <b>Employees of the Year</b> <br />
+              Linda, Johnny, Fran, Zurple, Billy, and Mango
+            </p>
             <img
-              src="/public/Hyrax-6891.jpg"
+              src="/Hyrax-6891.jpg"
               alt="Employees of the Year, (Linda, Johnny, Fran, Zurple, Billy, and Mango)"
               className="border-2 rounded-md border-white"
             />
