@@ -8,7 +8,7 @@ const HomeLayout = () => {
       <header>
         <Navbar />
       </header>
-      <main className="">
+      <main>
         <Outlet />
         {/* maybe I'll remove the marquee Idk */}
         <Marquee />

@@ -57,7 +57,7 @@ function App({ location }) {
 
   return (
     <>
-      <div className="suse bg-[var(--background)] text-[var(--text1)]">
+      <div className="suse">
         <ProfileContext.Provider value={{ profile, setProfile }}>
           <Suspense fallback={<Loading />}>
             <RouterProvider router={router} />

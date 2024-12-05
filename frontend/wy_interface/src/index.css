@@ -6,10 +6,9 @@
 @tailwind utilities;
 
 /* color variables */
-:root {
-  --background: #000;
-  --text1: #fff;
-}
+/* :root {
+  /* bhbhb */
+
 /* utility classes for custom fonts, maybe rename to title-text/body-text */
 /* suse */
 .suse {
