@@ -2,7 +2,7 @@ import React from "react";
 
 const UserProfileStats = () => {
   return (
-    <div className="stats stats-vertical md:stats-horizontal shadow">
+    <div className="stats stats-vertical shadow">
       <div className="stat">
         <div className="stat-figure text-primary">
           <svg

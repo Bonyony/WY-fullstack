@@ -73,7 +73,7 @@ const LiveChat = () => {
   };
 
   return (
-    <div className="flex md:flex-row flex-col items-center justify-center">
+    <div className="flex md:flex-row flex-col items-center justify-center gap-2">
       {/* width needs to be changed, just set at dummy value now */}
       <div
         id="chatbox-container"
