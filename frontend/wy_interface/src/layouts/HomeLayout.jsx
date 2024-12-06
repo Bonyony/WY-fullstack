@@ -11,9 +11,9 @@ const HomeLayout = () => {
       <main>
         <Outlet />
         {/* maybe I'll remove the marquee Idk */}
-        <Marquee />
+        {/* <Marquee /> */}
       </main>
-      <footer>
+      <footer className="footer bg-base-200 text-base-content p-10">
         <Footer />
       </footer>
     </>

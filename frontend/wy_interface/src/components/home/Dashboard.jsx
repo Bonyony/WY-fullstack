@@ -61,11 +61,11 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="grid grid-flow-row  mt-5 mx-5">
-          {/* Main dash */}
+        {/* This card doesn't look good no matter what i try 12/6 */}
+        {/* <div className="grid grid-flow-row  mt-5 mx-5">
           <div
             id="misc-dash"
-            className="flex flex-col justify-between items-center py-6 outline outline-neutral card md:min-h-[400px]"
+            className="flex flex-col justify-between items-center py-6 card md:min-h-[400px]"
           >
             <h2 className="text-center card-title font-semibold">
               Hyrax Corporation Bulletin
@@ -75,19 +75,16 @@ const Dashboard = () => {
                 <b>Employees of the Year</b> <br />
                 Linda, Johnny, Fran, Zurple, Billy, and Mango
               </p>
+              <figure>
+                <img
+                  src="/Hyrax-6891.jpg"
+                  alt="Employees of the Year, (Linda, Johnny, Fran, Zurple, Billy, and Mango)"
+                  className="rounded-xl max-w-[500px]"
+                />
+              </figure>
             </div>
-            <figure>
-              <img
-                src="/Hyrax-6891.jpg"
-                alt="Employees of the Year, (Linda, Johnny, Fran, Zurple, Billy, and Mango)"
-                className="rounded-sm"
-              />
-            </figure>
-            <Link className="btn btn-primary max-w-[200px]" to="/home/alien">
-              Something Different
-            </Link>
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   );

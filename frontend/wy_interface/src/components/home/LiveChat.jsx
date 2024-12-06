@@ -77,7 +77,7 @@ const LiveChat = () => {
       {/* width needs to be changed, just set at dummy value now */}
       <div
         id="chatbox-container"
-        className="flex flex-col justify-between w-full max-w-[600px] p-4 mt-2 bg-slate-800 text-black rounded-sm "
+        className="flex flex-col justify-between w-full max-w-[600px] p-4 my-2 bg-slate-800 text-black rounded-sm "
       >
         {/* header for inside the chatbox */}
         <h2 className="px-5 py-1 font-bold bg-slate-700 text-white rounded-sm text-center">
