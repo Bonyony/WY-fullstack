@@ -47,7 +47,7 @@ const Signup = () => {
               <img
                 src={network}
                 alt="Structures of Data"
-                className="bg-primary min-h-[100px] min-w-[100px] rounded-lg hover:rounded-2xl hover:bg-white transition-all duration-500"
+                className="bg-primary min-h-[100px] min-w-[100px] rounded-lg hover:rounded-2xl  transition-all duration-500"
               />
             </Link>
             <h2 className="orbitron p-2 text-end text-balance text-2xl font-bold leading-9 tracking-tight">
@@ -124,7 +124,7 @@ const Signup = () => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center btn btn-primary px-3 py-1.5 font-semibold leading-6  shadow-sm  transition-all duration-200"
+                  className="flex w-full justify-center btn btn-outline px-3 py-1.5 font-semibold leading-6  shadow-sm  transition-all duration-200"
                 >
                   Sign-Up
                 </button>

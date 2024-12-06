@@ -119,7 +119,7 @@ const Login = () => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center btn btn-primary px-3 py-1.5 font-semibold leading-6 text-neutral shadow-sm  transition-all duration-200"
+                  className="flex w-full justify-center btn btn-outline px-3 py-1.5 font-semibold leading-6 shadow-sm  transition-all duration-200"
                 >
                   Login
                 </button>

@@ -10,7 +10,7 @@ const Menu = () => {
           <NavLink to="/home/dashboard">Dashboard</NavLink>
         </li>
         <li className=" hover:text-yellow-200">
-          <NavLink to="/home/chatselect">Chat Logs</NavLink>
+          <NavLink to="/home/chatselect">Chat</NavLink>
         </li>
         {/* Component not needed as of now, but I may change my mind */}
         {/* <li className="hover:text-yellow-200">
@@ -34,7 +34,7 @@ const SmallMenu = () => {
         <NavLink to="/home/dashboard">Dashboard</NavLink>
       </li>
       <li className="hover:text-yellow-200">
-        <NavLink to="/home/chatselect">Chat Logs</NavLink>
+        <NavLink to="/home/chatselect">Chat</NavLink>
       </li>
       {/* Component not needed as of now, but I may change my mind */}
       {/* <li className="hover:text-yellow-200">

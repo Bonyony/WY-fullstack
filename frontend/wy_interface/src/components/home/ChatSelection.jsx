@@ -31,7 +31,7 @@ const ChatSelection = () => {
 
   return (
     <section className="min-h-[500px] w-full flex flex-col items-center justify-center align-middle">
-      <div className="flex flex-col items-center gap-2 bg-base-200 outline outline-neutral p-8 card">
+      <div className="flex flex-col items-center gap-2  outline outline-primary p-8 card">
         <h1 className="font-bold text-2xl">Select a Chat Room...</h1>
         <div className="relative">
           <select
