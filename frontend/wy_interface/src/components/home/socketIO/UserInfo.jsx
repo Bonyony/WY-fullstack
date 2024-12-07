@@ -2,7 +2,7 @@ import React from "react";
 
 const UserInfo = ({ users, room }) => {
   return (
-    <div className="bg-slate-800 text-white p-2 rounded-r-md">
+    <div className="card outline outline-neutral p-2 ">
       <h2 className="font-bold">INFO</h2>
       {users ? (
         <div>

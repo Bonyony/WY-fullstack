@@ -17,8 +17,8 @@ const Profile = () => {
   return (
     <section className="container max-w-screen-lg mx-auto px-4">
       <div id="profile-card" className="py-4 px-8 h-screen rounded-sm">
-        <h2 className="text-xl font-black mb-2">
-          Welcome {profile.username}, please review our data-banks
+        <h2 className="text-xl text-center font-black mb-2">
+          Welcome {profile.username}, please review your data-banks
         </h2>
         <UserProfileStats />
         <div className="p-2 uppercase flex flex-col gap-4 text-white bg-slate-900 rounded-md">

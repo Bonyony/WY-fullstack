@@ -73,15 +73,15 @@ const LiveChat = () => {
   };
 
   return (
-    <div className="flex md:flex-row flex-col items-center justify-center gap-2">
+    <div className="flex md:flex-row flex-col items-center justify-center gap-3 mx-2">
       {/* width needs to be changed, just set at dummy value now */}
       <div
         id="chatbox-container"
-        className="flex flex-col justify-between w-full max-w-[600px] p-4 my-2 bg-slate-800 text-black rounded-sm "
+        className="flex flex-col justify-between w-full max-w-[600px] p-4 my-2 card outline outline-primary"
       >
         {/* header for inside the chatbox */}
-        <h2 className="px-5 py-1 font-bold bg-slate-700 text-white rounded-sm text-center">
-          {profile.username}, you may enter your deep space message below:
+        <h2 className="px-5 py-1 font-bold text-center">
+          {profile.username}, enter your deep space messages below
         </h2>
         {/* messages */}
         <ChatMessages messages={messages} name={name} />
@@ -97,14 +97,28 @@ const LiveChat = () => {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Hyraxes are very cool..."
             id="message-input"
-            className="w-full border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 text-sm sm:leading-6"
+            className="block w-full  input input-bordered"
           />
           <button
             type="submit"
             id="send-button"
-            className="text-nowrap py-1 px-2 ml-1 rounded bg-gray-500 hover:bg-emerald-600 text-sm text-white"
+            className=" ml-1 btn btn-circle btn-primary"
           >
-            Send Message
+            <svg
+              width="25px"
+              height="25px"
+              viewBox="-0.5 0 25 25"
+              fill="black"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.16109 12.9424L2.91109 12.4324C2.42109 12.3124 2.35109 11.6724 2.80109 11.4624L20.7111 3.55243C21.1811 3.34243 21.6711 3.81243 21.4411 4.25243L13.0111 21.2124C12.7811 21.6424 12.1211 21.5724 12.0011 21.1124L11.1711 13.2124L18.4411 6.41243"
+                stroke="#0F0F0F"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </button>
         </form>
       </div>
