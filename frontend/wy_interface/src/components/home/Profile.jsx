@@ -15,27 +15,13 @@ const Profile = () => {
   };
 
   return (
-    <section className="container max-w-screen-lg mx-auto px-4">
-      <div id="profile-card" className="py-4 px-8 h-screen rounded-sm">
+    <section className="container max-w-screen-md mx-auto px-4">
+      <div id="profile-card" className="py-4 px-8 min-h-[500px] rounded-sm">
         <h2 className="text-xl text-center font-black mb-2">
           Welcome {profile.username}, please review your data-banks
         </h2>
-        <UserProfileStats />
-        <div className="p-2 uppercase flex flex-col gap-4 text-white bg-slate-900 rounded-md">
-          <div className="flex flex-row justify-between">
-            <p>Time in our system: </p>
-            <p>Undefined</p>
-          </div>
-          <div className="flex flex-row justify-between">
-            <p>Preffered space-org: </p>
-            <p>The Hyrax Consulate</p>
-          </div>
-          <div className="flex flex-row justify-between">
-            <p>Your biography: </p>
-            <p>Undefined</p>
-          </div>
-        </div>
-        <div className="flex flex-row justify-center w-full">
+        <div className="flex flex-col justify-center w-auto">
+          <UserProfileStats />
           <button className=" my-2 btn btn-error" onClick={signOut}>
             SIGN OUT
           </button>

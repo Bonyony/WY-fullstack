@@ -7,8 +7,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <section className="container max-w-screen-lg mx-auto px-4">
-        <h1 className="text-center text-3xl  font-black m-5">
+      <section className="container max-w-screen-lg mx-auto min-h-[500px] px-4">
+        <h1 className="text-center text-3xl font-black mb-5">
           {profile.username}'s Dashboard
         </h1>
         <div className="grid grid-flow-row md:grid-cols-2 md:grid-flow-col gap-5 mx-5">

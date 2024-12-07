@@ -4,7 +4,7 @@ import Message from "./Message";
 
 const ChatMessages = ({ messages, name }) => {
   return (
-    <ScrollToBottom className=" mt-2 w-full h-[500px] overflow-auto rounded-md">
+    <ScrollToBottom className=" mt-2 w-full h-[450px] overflow-auto rounded-md">
       {messages.map((val, i) => (
         <p key={i}>
           <Message message={val} name={name} />
