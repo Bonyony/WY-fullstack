@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Footer, Marquee, Navbar } from "../components";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import { ProfileContext } from "../App";
 
 const HomeLayout = () => {
+  const { profile } = useContext(ProfileContext);
+
+  if (profile == null) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <>
       <header>

@@ -41,7 +41,7 @@ const ChatSelection = () => {
             required
           >
             <option value="" disabled>
-              Select a room
+              {availableRooms.length ? "Select a room" : "No rooms available"}
             </option>
             {availableRooms.map((room) => (
               <option key={room} value={room}>
@@ -69,7 +69,11 @@ const ChatSelection = () => {
           onClick={(e) => (!name || !room ? e.preventDefault() : null)}
           to={`/home/chat?name=${name}&room=${room}`}
         >
-          <button className="btn btn-sm btn-primary mt-2" type="submit">
+          <button
+            className="btn btn-sm btn-primary mt-2"
+            type="submit"
+            disabled={!name || !room}
+          >
             Enter
           </button>
         </Link>

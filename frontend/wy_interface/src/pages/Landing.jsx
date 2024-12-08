@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Marquee } from "../components";
+import { ProfileContext } from "../App";
 
 const Landing = () => {
+  const { profile } = useContext(ProfileContext);
+
   return (
     <>
       <div className="lines flex flex-col justify-center align-middle w-screen h-screen items-center">
@@ -14,7 +17,10 @@ const Landing = () => {
               so that the user is forced to log in to continue */}
           <Link
             to="/home/dashboard"
-            className="p-1 m-2 min-w-[100px] text-center btn btn-primary uppercase"
+            className={
+              "p-1 m-2 min-w-[100px] text-center btn uppercase " +
+              (profile == null ? "btn-disabled" : "btn-primary")
+            }
           >
             Enter
           </Link>
