@@ -31,8 +31,8 @@ const Marquee = () => {
           animate="animate"
         >
           <h1>
-            We are watching. The Hyraxes are watching. We are waiting. I am
-            watching. Hi Mom. Frank is watching. Do you see me? We are watching.
+            Welcome to the Hyrax Corporation. The Hyraxes are watching. The
+            Hyraxes are ready to help. Hi Mom. Frank is watching. Do you see me?
           </h1>
         </motion.div>
       </div>

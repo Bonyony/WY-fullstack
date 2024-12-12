@@ -1,13 +1,15 @@
-import React from "react";
+import React, { Suspense, useState } from "react";
+
+// 3d models
+import AlienModels from "./r3f/AlienModels";
 
 const Alien = () => {
+  const [speed, setSpeed] = useState(1);
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center align-middle">
-      <p className="text-center m-10">
-        Alien <br />
-        Some sort of React-Three-Fiber animation where an alien looks at the
-        user through the screen and their face follows the mouse!
-      </p>
+      <Suspense>
+        <AlienModels speed={speed} />
+      </Suspense>
     </div>
   );
 };
