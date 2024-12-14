@@ -15,7 +15,7 @@ const Dashboard = () => {
           {/* Chat box */}
           <div
             id="chat-dash"
-            className="flex flex-col justify-between items-center py-6 outline outline-neutral card md:min-h-[400px]"
+            className="flex flex-col justify-between items-center  py-6 outline outline-neutral card md:min-h-[400px]"
           >
             <h2 className="text-center text-xl font-semibold">Rax-Chat</h2>
             <div className="card-body">

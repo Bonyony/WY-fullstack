@@ -29,7 +29,7 @@ const Menu = () => {
 
 const SmallMenu = () => {
   return (
-    <ul className="orbitron flex flex-col gap-2 mt-2 text-right mr-2">
+    <ul className="orbitron flex flex-col gap-2 mt-10 text-right absolute bg-black outline outline-primary rounded-xl py-2 px-3 z-20">
       <li className=" hover:text-yellow-200">
         <NavLink to="/home/dashboard">Dashboard</NavLink>
       </li>
@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     // give this a "fixed" class for some different options || removed 11/28
-    <div className="z-20 mix-blend-difference top-0 w-full">
+    <div className="z-20 top-0 w-full">
       <div className="flex flex-row justify-between  py-4 px-6">
         <NavLink to="/">
           <h1 className="orbitron text-balance text-start hover:text-yellow-200">
