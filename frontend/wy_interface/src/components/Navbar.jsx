@@ -29,7 +29,7 @@ const Menu = () => {
 
 const SmallMenu = () => {
   return (
-    <ul className="orbitron flex flex-col gap-2 mt-10 text-right absolute bg-black outline outline-primary rounded-xl py-2 px-3 z-20">
+    <ul className="orbitron flex flex-col gap-2 mt-10 text-right absolute bg-black outline outline-current  py-2 px-3 z-20">
       <li className=" hover:text-yellow-200">
         <NavLink to="/home/dashboard">Dashboard</NavLink>
       </li>

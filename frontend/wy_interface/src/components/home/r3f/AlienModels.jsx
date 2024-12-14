@@ -71,57 +71,48 @@ const AlienModels = () => {
       camera={{ position: [0, 20, 50], fov: 50 }}
       style={{ height: "100vh", width: "100%" }}
     >
-      <Suspense>
-        <directionalLight position={[10, 30, 5]} intensity={1.2} />
-        {/* <directionalLight position={[-7, 12, 4]} intensity={1} color={"blue"} /> */}
+      <directionalLight position={[10, 30, 5]} intensity={1.2} />
+      {/* <directionalLight position={[-7, 12, 4]} intensity={1} color={"blue"} /> */}
 
-        {/* Spotlight */}
-        <spotLight
-          position={[-7, 12, 4]} // Light source position
-          angle={7} // Spotlight cone angle
-          penumbra={8} // Soft edges
-          intensity={5} // Brightness
-          castShadow
-          color={"lightgreen"}
-          decay={0}
-          shadow-mapSize={[1024, 1024]} // Shadow resolution
-          // target={new THREE.Object3D().position.set(7, 0, 0)} // Focus on GreyAlien
-        />
+      {/* Spotlight */}
+      <spotLight
+        position={[-7, 12, 4]} // Light source position
+        angle={7} // Spotlight cone angle
+        penumbra={8} // Soft edges
+        intensity={5} // Brightness
+        castShadow
+        color={"lightgreen"}
+        decay={0}
+        shadow-mapSize={[1024, 1024]} // Shadow resolution
+        // target={new THREE.Object3D().position.set(7, 0, 0)} // Focus on GreyAlien
+      />
 
-        <ambientLight intensity={0.7} />
-        <OrbitControls enableZoom={false} makeDefault={true} />
-        {/* <Environment preset="sunset" background /> */}
-        <GreyAlien position={[7, 0, 0]} />
-        <FlyingSaucer
-          position={[-7, 12, 4]}
-          rotation={[Math.PI / 8, 0, Math.PI / 8]}
-        />
-        {/* y value of 1.5 will make Bunny even with the other models */}
-        <Bunny
-          position={[-4, 8.5, 3]}
-          rotation={[Math.PI / 8, 0, Math.PI / 8]}
-        />
+      <ambientLight intensity={0.7} />
+      <OrbitControls enableZoom={false} makeDefault={true} />
+      {/* <Environment preset="sunset" background /> */}
+      <GreyAlien position={[7, 0, 0]} />
+      <FlyingSaucer
+        position={[-7, 12, 4]}
+        rotation={[Math.PI / 8, 0, Math.PI / 8]}
+      />
+      {/* y value of 1.5 will make Bunny even with the other models */}
+      <Bunny position={[-4, 8.5, 3]} rotation={[Math.PI / 8, 0, Math.PI / 8]} />
 
-        {/* Floor */}
-        <mesh
-          receiveShadow
-          rotation={[-Math.PI / 2, 0, 0]}
-          position={[0, -1, 0]}
-        >
-          <planeGeometry args={[100, 100]} />
-          <shadowMaterial opacity={0.4} />
-        </mesh>
-        <EffectComposer>
-          {/* <DepthOfField
+      {/* Floor */}
+      <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
+        <planeGeometry args={[100, 100]} />
+        <shadowMaterial opacity={0.4} />
+      </mesh>
+      <EffectComposer>
+        {/* <DepthOfField
             focusDistance={0}
             focalLength={0.02}
             bokehScale={2}
             height={480}
           /> */}
-          {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
-          <Noise opacity={0.02} />
-        </EffectComposer>
-      </Suspense>
+        {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
+        <Noise opacity={0.02} />
+      </EffectComposer>
     </Canvas>
   );
 };

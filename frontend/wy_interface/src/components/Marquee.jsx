@@ -7,7 +7,7 @@ import "../styles/marquee.css";
 // set with window parameters from the DOM?
 const marqueeVariants = {
   animate: {
-    x: [1500, -8500],
+    x: [screen.width, -8900],
     transition: {
       x: {
         repeat: Infinity,

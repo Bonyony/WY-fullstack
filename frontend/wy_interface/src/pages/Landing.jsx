@@ -2,13 +2,14 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Marquee } from "../components";
 import { ProfileContext } from "../App";
+import { motion } from "framer-motion";
 
 const Landing = () => {
   const { profile } = useContext(ProfileContext);
 
   return (
     <>
-      <div className="lines flex flex-col justify-center align-middle w-screen h-screen items-center">
+      <div className="lines flex flex-col justify-center align-middle w-screen h-screen items-center z-40">
         <h1 className="orbitron m-8 text-4xl font-bold text-center ">
           Hyrax <br /> Corporation
         </h1>
