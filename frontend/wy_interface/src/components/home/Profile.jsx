@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { ProfileContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import UserProfileStats from "./socketIO/UserProfileStats";
+import Clock from "./Clock";
 
 const Profile = () => {
   const { profile, setProfile } = useContext(ProfileContext);
   const navigate = useNavigate();
 
-  console.log(profile);
   const signOut = () => {
     setProfile(null);
     navigate("/");
@@ -20,6 +20,7 @@ const Profile = () => {
         <h2 className="text-xl text-center font-black mb-2">
           Welcome {profile.username}, please review your data-banks
         </h2>
+        <Clock />
         <div className="flex flex-col justify-center w-auto">
           <UserProfileStats />
           <button className=" my-2 btn btn-error" onClick={signOut}>

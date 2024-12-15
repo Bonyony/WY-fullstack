@@ -12,10 +12,6 @@ const Menu = () => {
         <li className=" hover:text-yellow-200">
           <NavLink to="/home/chatselect">Chat</NavLink>
         </li>
-        {/* Component not needed as of now, but I may change my mind */}
-        {/* <li className="hover:text-yellow-200">
-          <NavLink to="/home/buy">Buy</NavLink>
-        </li> */}
         <li className="hover:text-yellow-200">
           <NavLink to="/home/alien">Aliens</NavLink>
         </li>
@@ -36,10 +32,6 @@ const SmallMenu = () => {
       <li className="hover:text-yellow-200">
         <NavLink to="/home/chatselect">Chat</NavLink>
       </li>
-      {/* Component not needed as of now, but I may change my mind */}
-      {/* <li className="hover:text-yellow-200">
-        <NavLink to="/home/buy">Buy</NavLink>
-      </li> */}
       <li className="hover:text-yellow-200">
         <NavLink to="/home/alien">Aliens</NavLink>
       </li>

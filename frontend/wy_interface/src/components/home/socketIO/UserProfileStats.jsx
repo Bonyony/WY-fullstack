@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ProfileContext } from "../../../App";
 
 const UserProfileStats = () => {
+  const { profile } = useContext(ProfileContext);
+
   return (
     <div className="stats stats-vertical shadow">
       <div className="stat">
@@ -48,14 +51,20 @@ const UserProfileStats = () => {
       <div className="stat">
         <div className="stat-figure text-secondary">
           <div className="avatar">
-            <div className="w-16 rounded-full">
+            <div className="w-auto rounded-full">
               <img src="/icons8-alien-64.png" />
             </div>
           </div>
         </div>
-        <div className="stat-value">86%</div>
-        <div className="stat-title">Tasks done</div>
-        <div className="stat-desc text-secondary">31 tasks remaining</div>
+        <div className="stat-title">Clearance Levels</div>
+
+        {profile.roles.map((role) => (
+          <div className="stat-value text-base">{role.split("ROLE_")}</div>
+        ))}
+
+        <div className="stat-desc text-secondary">
+          {profile.roles.length === 3 ? "Full Access!" : "Standard Access"}
+        </div>
       </div>
     </div>
   );
