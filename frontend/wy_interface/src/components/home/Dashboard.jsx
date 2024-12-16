@@ -24,6 +24,13 @@ const Dashboard = () => {
                 sound like fun? NO!? Then just wait here for Frank to add more
                 features...
               </p>
+              <figure>
+                <img
+                  src="/Hyrax-6891.jpg"
+                  alt="Hyraxes looking at the camera"
+                  className="max-w-64 rounded-full image-full"
+                />
+              </figure>
             </div>
             <Link
               className="btn btn-primary max-w-[200px]"

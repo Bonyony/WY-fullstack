@@ -3,6 +3,9 @@ import network from "/icons8-networking-100.png";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <>
       <aside className="md:ml-8">
@@ -19,16 +22,32 @@ const Footer = () => {
       </aside>
       <nav>
         <h6 className="footer-title">Services</h6>
-        <NavLink className="link link-hover" to="/home/dashboard">
+        <NavLink
+          className="link link-hover"
+          to="/home/dashboard"
+          onClick={scrollToTop}
+        >
           Dashboard
         </NavLink>
-        <NavLink className="link link-hover" to="/home/chatselect">
+        <NavLink
+          className="link link-hover"
+          to="/home/chatselect"
+          onClick={scrollToTop}
+        >
           Chat Rooms
         </NavLink>
-        <NavLink className="link link-hover" to="/home/alien">
+        <NavLink
+          className="link link-hover"
+          to="/home/alien"
+          onClick={scrollToTop}
+        >
           Aliens
         </NavLink>
-        <NavLink className="link link-hover" to="/home/profile">
+        <NavLink
+          className="link link-hover"
+          to="/home/profile"
+          onClick={scrollToTop}
+        >
           Profile
         </NavLink>
       </nav>
