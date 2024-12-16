@@ -15,14 +15,14 @@ const Message = ({ message: { text, user }, name }) => {
       <b className="text-xs text-emerald-500">{name}</b>
 
       <div className="rounded-xl rounded-br-none px-3 py-1 max-w-[300px] bg-emerald-900 text-white inline-block text-wrap">
-        <p className="w-full float-left break-words">{text}</p>
+        <p className="w-full float-left break-all">{text}</p>
       </div>
     </div>
   ) : (
     // other user
     <div className="flex gap-2 justify-start  mb-2 mt-1 ml-2">
       <div className="rounded-xl rounded-bl-none px-3 py-1 max-w-[300px] bg-slate-700 text-white inline-block text-wrap">
-        <p className="w-full float-left break-words">{text}</p>
+        <p className="w-full float-left break-all">{text}</p>
       </div>
       <b className="text-xs text-yellow-500">{user}</b>
     </div>

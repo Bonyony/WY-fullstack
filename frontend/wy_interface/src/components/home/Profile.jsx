@@ -21,6 +21,7 @@ const Profile = () => {
           Welcome {profile.username}, please review your data-banks
         </h2>
         <Clock />
+
         <div className="flex flex-col justify-center w-auto">
           <UserProfileStats />
           <button className=" my-2 btn btn-error" onClick={signOut}>
