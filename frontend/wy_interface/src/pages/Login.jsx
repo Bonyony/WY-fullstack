@@ -96,7 +96,10 @@ const Login = () => {
                     Password
                   </label>
                   {/* This should maybe be removed from login? */}
-                  <div className="text-sm">
+                  <div
+                    className="text-sm tooltip tooltip-primary"
+                    data-tip="This feature is not live yet. Sorry."
+                  >
                     <a href="#" className="font-semibold">
                       Forgot password?
                     </a>

@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import React, { useRef, useState, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, OrbitControls, Html } from "@react-three/drei";
+import React, { useRef, useState, Suspense, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useGLTF, Html } from "@react-three/drei";
 import {
   Bloom,
   DepthOfField,
@@ -9,6 +9,7 @@ import {
   Noise,
   Glitch,
 } from "@react-three/postprocessing";
+import MouseTracker from "./MouseTracker";
 
 const GreyAlien = ({ position, rotation }) => {
   const { nodes, materials } = useGLTF("/models/Alien.glb");
@@ -59,6 +60,23 @@ const FlyingSaucer = ({ position, rotation }) => {
   );
 };
 
+function Scene() {
+  const mouse = MouseTracker();
+  const { camera } = useThree();
+  const target = new THREE.Vector3();
+
+  useFrame(() => {
+    const updateCameraTarget = () => {
+      target.set(mouse.x * 5, mouse.y * 5, 0); // Scale the target to move in world space
+      camera.lookAt(target);
+    };
+
+    updateCameraTarget();
+  }, [mouse, camera]);
+
+  return null;
+}
+
 const AlienModels = () => {
   return (
     <Canvas
@@ -66,6 +84,7 @@ const AlienModels = () => {
       camera={{ position: [0, 6, 50], fov: 50 }}
       style={{ height: "100vh", width: "100%" }}
     >
+      <Scene />
       <directionalLight position={[10, 30, 5]} intensity={1.2} />
       {/* <directionalLight position={[-7, 12, 4]} intensity={1} color={"blue"} /> */}
 
@@ -81,9 +100,7 @@ const AlienModels = () => {
         shadow-mapSize={[1024, 1024]} // Shadow resolution
         // target={new THREE.Object3D().position.set(7, 0, 0)} // Focus on GreyAlien
       />
-
       <ambientLight intensity={0.7} />
-      <OrbitControls enableZoom={false} makeDefault={true} enablePan={false} />
       {/* Alien by bunny */}
       <GreyAlien position={[7, 0, 0]} rotation={[0, -Math.PI / 4, 0]} />
       {/* Foreground Aliens */}
