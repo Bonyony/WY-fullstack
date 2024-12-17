@@ -1,36 +1,36 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ProfileContext } from "../../App";
+import Hero from "./Hero";
 
 const Dashboard = () => {
   const { profile } = useContext(ProfileContext);
 
   return (
     <>
+      <Hero profile={profile} />
+
       <section className="container max-w-screen-lg mx-auto min-h-[500px] px-4">
-        <h1 className="text-center text-3xl font-black mb-5">
-          {profile.username}'s Dashboard
-        </h1>
         <div className="grid grid-flow-row md:grid-cols-2 md:grid-flow-col gap-5 mx-5">
           {/* Chat box */}
           <div
             id="chat-dash"
             className="flex flex-col justify-between items-center  py-6 outline outline-neutral card md:min-h-[400px]"
           >
-            <h2 className="text-center text-xl font-semibold">Rax-Chat</h2>
+            <h2 className="text-center text-3xl font-semibold">Rax-Chat</h2>
             <div className="card-body">
               <p>
                 Join a fun chat room to speak with other people! Doesn't that
                 sound like fun? NO!? Then just wait here for Frank to add more
                 features...
               </p>
-              <figure>
+              {/* <figure>
                 <img
                   src="/Hyrax-6891.jpg"
                   alt="Hyraxes looking at the camera"
                   className="max-w-64 rounded-full image-full"
                 />
-              </figure>
+              </figure> */}
             </div>
             <Link
               className="btn btn-primary max-w-[200px]"
@@ -45,7 +45,7 @@ const Dashboard = () => {
             id="profile-dash"
             className="flex flex-col justify-between items-center py-6  outline outline-neutral card md:min-h-[400px]"
           >
-            <h2 className="text-center text-xl font-semibold">
+            <h2 className="text-center text-3xl font-semibold">
               View Your Profile
             </h2>
             <div className="card-body">

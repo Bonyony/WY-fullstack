@@ -83,7 +83,7 @@ const AlienModels = () => {
       />
 
       <ambientLight intensity={0.7} />
-      <OrbitControls enableZoom={false} makeDefault={true} />
+      <OrbitControls enableZoom={false} makeDefault={true} enablePan={false} />
       {/* Alien by bunny */}
       <GreyAlien position={[7, 0, 0]} rotation={[0, -Math.PI / 4, 0]} />
       {/* Foreground Aliens */}
