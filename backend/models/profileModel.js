@@ -7,7 +7,7 @@ const profileSchema = new Schema(
       type: String,
       required: [true, "Please enter your username"],
       minLength: [2, "Username must be over 2 characters long!"],
-      maxLength: [30, "Username must be under 30 characters long!"],
+      maxLength: [20, "Username must be under 20 characters long!"],
     },
     email: {
       type: String,
@@ -18,7 +18,7 @@ const profileSchema = new Schema(
       type: String,
       required: [true, "Please enter a password"],
       minLength: [8, "Password must be over 8 characters long!"],
-      maxLength: [30, "Password must be under 30 characters long!"],
+      maxLength: [20, "Password must be under 20 characters long!"],
     },
     roles: [
       {

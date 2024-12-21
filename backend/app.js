@@ -55,7 +55,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to frank's sample application." });
 });
 // chat logic call
-require("./config/socket")(io);
+require("./socketio/socket")(io);
 // routes
 require("./routes/authRoutes")(app);
 require("./routes/userRoutes")(app);

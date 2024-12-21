@@ -7,7 +7,7 @@ import { ProfileContext } from "../App";
 // Need to update this page to include Schema info,
 // i.e. Username is between 2 and 30 characters
 // Password is between 8 and 30 characters. Also
-// should have this only pop up white the input box is active
+// should have this only pop up while the input box is active
 
 const Signup = () => {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -72,6 +72,7 @@ const Signup = () => {
                     type="text"
                     value={inputs.username || ""}
                     onChange={handleChange}
+                    maxlength="20"
                     required
                     className="block w-full input input-bordered"
                   />
@@ -115,6 +116,7 @@ const Signup = () => {
                     type="password"
                     value={inputs.password || ""}
                     onChange={handleChange}
+                    maxlength="20"
                     required
                     className="block w-full input input-bordered"
                   />
