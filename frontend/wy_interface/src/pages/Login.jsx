@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import alien from "/icons8-alien-64.png";
 import { ProfileContext } from "../App";
+import { loginRequest } from "../utils/apiUtils";
 
 const Login = () => {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -16,20 +16,16 @@ const Login = () => {
   };
 
   // this form action should only fire if the profile returns 200
-  const formAction = (e) => {
+  const formAction = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/login", inputs, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      })
-      .then((res) => {
-        setProfile(res.data);
-        navigate("/home/dashboard");
-      })
-      .catch((err) => console.log(err));
+
+    try {
+      const userData = await loginRequest(inputs);
+      setProfile(userData);
+      navigate("/home/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import network from "/icons8-networking-100.png";
-import axios from "axios";
+
 import { ProfileContext } from "../App";
 
-// Need to update this page to include Schema info,
-// i.e. Username is between 2 and 30 characters
-// Password is between 8 and 30 characters. Also
-// should have this only pop up while the input box is active
+import { loginRequest, signupRequest } from "../utils/apiUtils";
+import { validateInputs } from "../utils/validateInputsUtils";
 
 const Signup = () => {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -15,61 +13,24 @@ const Signup = () => {
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState({});
 
-  const validate = (field, value) => {
-    const newErrors = { ...errors };
-
-    if (field === "username") {
-      if (value.length < 2 || value.length > 20) {
-        newErrors.username = "Username must be between 2 and 20 characters.";
-      } else {
-        delete newErrors.username;
-      }
-    }
-
-    if (field === "password") {
-      if (value.length < 8 || value.length > 30) {
-        newErrors.password = "Password must be between 8 and 20 characters.";
-      } else {
-        delete newErrors.password;
-      }
-    }
-
-    setErrors(newErrors);
-  };
-
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
-    validate(name, value);
+    const newErrors = validateInputs(name, value, errors);
+    setErrors(newErrors);
   };
 
-  // This MUST be refactored. It is extremely ugly
-  const formAction = (e) => {
+  const formAction = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/signup", inputs, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        axios
-          .post("http://localhost:3000/login", inputs, {
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json;charset=UTF-8",
-            },
-          })
-          .then((res) => {
-            setProfile(res.data);
-            navigate("/home/dashboard");
-          })
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => console.log(err));
+    try {
+      signupRequest(inputs);
+      const userData = await loginRequest(inputs);
+      setProfile(userData);
+      navigate("/home/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

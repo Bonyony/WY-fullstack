@@ -3,6 +3,7 @@ import { ProfileContext } from "../../../App";
 
 const UserProfileStats = () => {
   const { profile } = useContext(ProfileContext);
+  console.log(profile);
 
   return (
     <div className="stats stats-vertical shadow">
@@ -44,8 +45,22 @@ const UserProfileStats = () => {
             ></path>
           </svg>
         </div>
-        <div className="stat-title">Time as a Member</div>
-        <div className="stat-value text-secondary">2 Days</div>
+        <div className="stat-title">Biography</div>
+        {/* Put a button here to edit the bio.
+            It should have:
+            1. some sort of POST request
+            2. feedback for length of bio (< 500)
+            3. A nice look to it
+        */}
+        <div className=" text-secondary">
+          {
+            // This ternary is to ensure that all profiles have default text
+            // In production there should be no null bios
+            profile.biography == null
+              ? "This user hasn't added a biography yet."
+              : profile.biography
+          }
+        </div>
       </div>
 
       <div className="stat">

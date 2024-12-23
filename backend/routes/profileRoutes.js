@@ -1,6 +1,4 @@
-const { authJWT } = require("../middleware");
-const controller = require("../controllers/userController");
-const dataController = require("../controllers/profileController");
+const controller = require("../controllers/bioController");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -8,5 +6,5 @@ module.exports = function (app) {
     next();
   });
 
-  app.get("profile/:id", dataController.getData);
+  app.post("/biography", controller.updateBiography);
 };
