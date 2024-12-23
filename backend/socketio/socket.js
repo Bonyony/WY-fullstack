@@ -5,6 +5,9 @@ const {
   getChatUsersInRoom,
   getAvailableRooms,
 } = require("./chatUser");
+const {
+  incrementMessagesSent,
+} = require("../middleware/messagesSentMiddleware");
 
 module.exports = (io) => {
   // chat
@@ -54,6 +57,8 @@ module.exports = (io) => {
         user: user.name,
         text: message,
       });
+      // increment messages sent here
+      incrementMessagesSent(user);
 
       callback();
     });

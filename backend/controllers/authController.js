@@ -31,6 +31,9 @@ exports.signup = async (req, res) => {
     // Save the updated profile with roles
     await savedProfile.save();
 
+    // IMPORTANT This only sneds a message that the user was generated correctly
+    // To properly set the user's roles, a login must be made immediately after signup
+    // on the frontend
     res.send({ message: "User was registered successfully" });
   } catch (err) {
     res.status(500).send({

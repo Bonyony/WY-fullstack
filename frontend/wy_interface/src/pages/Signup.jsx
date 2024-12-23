@@ -13,14 +13,38 @@ const Signup = () => {
   const { profile, setProfile } = useContext(ProfileContext);
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const validate = (field, value) => {
+    const newErrors = { ...errors };
+
+    if (field === "username") {
+      if (value.length < 2 || value.length > 20) {
+        newErrors.username = "Username must be between 2 and 20 characters.";
+      } else {
+        delete newErrors.username;
+      }
+    }
+
+    if (field === "password") {
+      if (value.length < 8 || value.length > 30) {
+        newErrors.password = "Password must be between 8 and 20 characters.";
+      } else {
+        delete newErrors.password;
+      }
+    }
+
+    setErrors(newErrors);
+  };
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
-    console.log(inputs);
+    validate(name, value);
   };
 
+  // This MUST be refactored. It is extremely ugly
   const formAction = (e) => {
     e.preventDefault();
     axios
@@ -32,8 +56,18 @@ const Signup = () => {
       })
       .then((res) => {
         console.log(res.data);
-        setProfile(res.data);
-        navigate("/home/dashboard");
+        axios
+          .post("http://localhost:3000/login", inputs, {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json;charset=UTF-8",
+            },
+          })
+          .then((res) => {
+            setProfile(res.data);
+            navigate("/home/dashboard");
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
@@ -59,12 +93,19 @@ const Signup = () => {
             <form id="user-signup" onSubmit={formAction} className="space-y-6">
               {/* username */}
               <div>
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium leading-6"
-                >
-                  Username
-                </label>
+                <div className="flex flex-row justify-between">
+                  <label
+                    htmlFor="username"
+                    className="block text-sm font-medium leading-6"
+                  >
+                    Username
+                  </label>
+                  {errors.username && (
+                    <p className="text-error text-right text-xs mt-1 ml-2">
+                      {errors.username}
+                    </p>
+                  )}
+                </div>
                 <div className="mt-2">
                   <input
                     id="username"
@@ -101,13 +142,18 @@ const Signup = () => {
               </div>
               {/* password */}
               <div>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-row justify-between">
                   <label
                     htmlFor="password"
                     className="block text-sm font-medium leading-6"
                   >
                     Password
                   </label>
+                  {errors.password && (
+                    <p className="text-error text-right text-xs mt-1 ml-2">
+                      {errors.password}
+                    </p>
+                  )}
                 </div>
                 <div className="mt-2">
                   <input

@@ -11,5 +11,5 @@ const messagesSentSchema = new Schema(
   { timestamps: true }
 );
 
-const MessagesSent = mongoose.model("MessagesSent", roleSchema);
+const MessagesSent = mongoose.model("MessagesSent", messagesSentSchema);
 module.exports = MessagesSent;

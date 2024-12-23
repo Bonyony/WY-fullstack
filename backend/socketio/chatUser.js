@@ -10,19 +10,15 @@ const AVAILABLE_ROOMS = [
 
 exports.addChatUser = ({ id, name, room }) => {
   console.log("Adding chat user:", { id, name, room });
-  name = name.trim().toLowerCase();
-  room = room.trim().toLowerCase();
+  name = name.trim();
+  room = room.trim();
 
   if (!name || !room) {
     console.error("Error: Name and room required.");
     return { error: "name and room required." };
   }
 
-  if (
-    !AVAILABLE_ROOMS.some(
-      (availableRoom) => availableRoom.toLowerCase() === room
-    )
-  ) {
+  if (!AVAILABLE_ROOMS.some((availableRoom) => availableRoom === room)) {
     console.error("Error: Invalid room.");
     return { error: "Invalid room. Please select a valid room." };
   }

@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 const Landing = () => {
   const { profile } = useContext(ProfileContext);
 
+  console.log(profile);
+
   return (
     <>
       <div className="lines flex flex-col justify-center align-middle w-screen h-screen items-center z-40">

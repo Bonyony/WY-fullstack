@@ -18,7 +18,6 @@ const profileSchema = new Schema(
       type: String,
       required: [true, "Please enter a password"],
       minLength: [8, "Password must be over 8 characters long!"],
-      maxLength: [20, "Password must be under 20 characters long!"],
     },
     roles: [
       {
@@ -26,10 +25,15 @@ const profileSchema = new Schema(
         ref: "Role",
       },
     ],
+    messagesSent: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "MessagesSent",
+    },
     biography: {
       type: String,
       trim: true,
       maxLength: [500, "Biography cannot exceed 500 characters!"],
+      default: "This user hasn't added a biography yet.",
     },
   },
   { timestamps: true }
