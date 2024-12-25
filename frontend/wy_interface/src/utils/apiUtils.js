@@ -29,3 +29,22 @@ export const signupRequest = async (inputs) => {
     throw error;
   }
 };
+
+export const bioRequest = async (inputs) => {
+  try {
+    const response = await axios.put(
+      "http://localhost:3000/biography",
+      inputs,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

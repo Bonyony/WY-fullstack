@@ -3,8 +3,7 @@ const Profile = dbModels.profile;
 
 exports.updateBiography = async (req, res) => {
   try {
-    // perhaps findOneAndUpdate?
-    // find username then only update the bio?
+    // find username then only update the bio
     const user = await Profile.findOne({
       username: req.body.username,
     });
@@ -16,7 +15,20 @@ exports.updateBiography = async (req, res) => {
     const newBio = req.body.biography;
 
     // update Profile with newBio
+    const updatedUser = await Profile.findOneAndUpdate(
+      {
+        username: req.body.username,
+      },
+      {
+        $set: { biography: newBio },
+      },
+      {
+        new: true,
+      }
+    );
+    console.log(updatedUser);
     // then send success code
+    return res.status(200).send(updatedUser);
   } catch (err) {
     res.status(500).send({
       message:
