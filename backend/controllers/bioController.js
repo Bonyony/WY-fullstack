@@ -26,9 +26,27 @@ exports.updateBiography = async (req, res) => {
       return res.status(404).send({ message: "User not found" });
     }
 
-    console.log(updatedUser);
+    const populatedUser = await Profile.findById(updatedUser._id).populate(
+      "roles",
+      "-__v"
+    );
+
+    // Create authorities array based on populated roles
+    const authorities = populatedUser.roles.map(
+      (role) => "ROLE_" + role.name.toUpperCase()
+    );
+
+    console.log({ ...populatedUser._doc, authorities });
     // then send success code
-    return res.status(200).send(updatedUser);
+    // This send the same info as when you log in so
+    // the data is consistent across the site
+    return res.status(200).send({
+      id: populatedUser._id,
+      username: populatedUser.username,
+      email: populatedUser.email,
+      roles: authorities,
+      biography: populatedUser.biography,
+    });
   } catch (err) {
     console.error("Error updating biography:", err);
     res.status(500).send({

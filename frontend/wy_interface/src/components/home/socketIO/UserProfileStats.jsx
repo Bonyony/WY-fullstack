@@ -7,7 +7,8 @@ const UserProfileStats = () => {
   const [input, setInput] = useState({});
   const { profile, setProfile } = useContext(ProfileContext);
 
-  console.log(profile);
+  // console.log(profile);
+  // console.log(profile.roles);
   // editing the bio now causes roles to appear as the coded verison
   // need to fix the auth system
 
@@ -30,6 +31,8 @@ const UserProfileStats = () => {
   };
 
   const isBioValid = input.biography && input.biography.length <= 500;
+
+  const formatRole = (role) => role.toUpperCase().split("ROLE_");
 
   return (
     <div className="stats stats-vertical shadow">
@@ -88,19 +91,19 @@ const UserProfileStats = () => {
               name="biography"
               value={input.biography || ""}
               className="textarea textarea-bordered mt-1 w-full"
-              placeholder="Maybe have old bio be placeholder?"
+              placeholder="Enter a new biography."
               maxLength={500}
               onChange={handleChange}
             ></textarea>
             <button
-              className="btn btn-primary mt-2"
+              className="btn btn-primary btn-xs mt-2"
               type="submit"
               disabled={!isBioValid}
             >
               Submit
             </button>
             {!isBioValid && (
-              <p className="text-error">
+              <p className="text-error text-xs mt-2">
                 Biography must be less than 500 characters.
               </p>
             )}
@@ -118,8 +121,10 @@ const UserProfileStats = () => {
         </div>
         <div className="stat-title">Clearance Levels</div>
 
-        {profile.roles.map((role) => (
-          <div className="stat-value text-base">{role.split("ROLE_")}</div>
+        {profile.roles.map((role, index) => (
+          <div key={index} className="stat-value text-base">
+            {formatRole(role)}
+          </div>
         ))}
 
         <div className="stat-desc text-secondary">

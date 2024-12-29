@@ -30,7 +30,7 @@ import usePersistedState from "./components/hooks/usePersistedState";
 export const ProfileContext = createContext();
 
 export const ProfileProvider = ({ children }) => {
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = usePersistedState("userProfile", null);
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>
@@ -62,9 +62,7 @@ const router = createBrowserRouter(
   )
 );
 
-function App({ location }) {
-  const [profile, setProfile] = usePersistedState(null);
-
+function App() {
   return (
     <>
       <div className="suse bg-base-200">
