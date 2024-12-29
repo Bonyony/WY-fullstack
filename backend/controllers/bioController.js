@@ -36,7 +36,6 @@ exports.updateBiography = async (req, res) => {
       (role) => "ROLE_" + role.name.toUpperCase()
     );
 
-    console.log({ ...populatedUser._doc, authorities });
     // then send success code
     // This send the same info as when you log in so
     // the data is consistent across the site
@@ -46,6 +45,7 @@ exports.updateBiography = async (req, res) => {
       email: populatedUser.email,
       roles: authorities,
       biography: populatedUser.biography,
+      messagesSent: populatedUser.messagesSent,
     });
   } catch (err) {
     console.error("Error updating biography:", err);

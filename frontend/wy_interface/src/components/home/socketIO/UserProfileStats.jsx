@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../../App";
 import { bioRequest } from "../../../utils/apiUtils";
 
@@ -7,10 +7,25 @@ const UserProfileStats = () => {
   const [input, setInput] = useState({});
   const { profile, setProfile } = useContext(ProfileContext);
 
-  // console.log(profile);
-  // console.log(profile.roles);
-  // editing the bio now causes roles to appear as the coded verison
-  // need to fix the auth system
+  console.log(profile);
+
+  // looks kind of ugly, but whatever
+  // this could just be a GET request also
+  // instead of reusing bioRequest?
+  useEffect(() => {
+    const fetchLatestProfile = async () => {
+      try {
+        const userData = await bioRequest({
+          biography: profile.biography,
+          username: profile.username,
+        });
+        setProfile(userData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchLatestProfile();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,8 +55,8 @@ const UserProfileStats = () => {
       <div className="stat">
         <div className="stat-figure text-primary">
           <svg
-            width="45px"
-            height="45px"
+            width="60px"
+            height="60px"
             viewBox="0 0 25 25"
             fill="lightgreen"
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +71,7 @@ const UserProfileStats = () => {
           </svg>
         </div>
         <div className="stat-title">Messages Sent</div>
-        <div className="stat-value text-primary">25.6K Not done yet</div>
+        <div className="stat-value text-primary">{profile.messagesSent}</div>
       </div>
       {/* User Bio */}
       <div className="stat">
@@ -74,7 +89,10 @@ const UserProfileStats = () => {
               d="M13 10V3L4 14h7v7l9-11h-7z"
             ></path>
           </svg>
-          <button className="" onClick={() => setUpdating(!updating)}>
+          <button
+            className="btn btn-outline btn-secondary btn-sm"
+            onClick={() => setUpdating(!updating)}
+          >
             {updating ? "Cancel" : "Edit Bio"}
           </button>
         </div>

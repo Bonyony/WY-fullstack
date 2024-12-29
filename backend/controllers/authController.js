@@ -84,6 +84,7 @@ exports.login = async (req, res) => {
       email: user.email,
       roles: authorities,
       biography: user.biography,
+      messagesSent: user.messagesSent,
     });
   } catch (err) {
     res

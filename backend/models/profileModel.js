@@ -6,6 +6,7 @@ const profileSchema = new Schema(
     username: {
       type: String,
       required: [true, "Please enter your username"],
+      unique: true,
       minLength: [2, "Username must be over 2 characters long!"],
       maxLength: [20, "Username must be under 20 characters long!"],
     },
@@ -26,8 +27,8 @@ const profileSchema = new Schema(
       },
     ],
     messagesSent: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "MessagesSent",
+      type: Number,
+      default: 0,
     },
     biography: {
       type: String,

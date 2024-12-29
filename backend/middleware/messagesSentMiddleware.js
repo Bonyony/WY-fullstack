@@ -4,10 +4,16 @@ const Profile = dbModels.profile;
 const incrementMessagesSent = async (user) => {
   // use user.name to match withe Profile.username
   try {
-    await Profile.updateOne(
-      { username: user.name },
-      { $inc: { messagesSent: 1 } }
-    );
+    const profile = await Profile.findOne({ username: user.name });
+
+    if (!profile) {
+      console.log(`Profile not found for ${user.name}`);
+      return;
+    }
+
+    profile.messagesSent += 1;
+    await profile.save();
+
     console.log(`Incremented messagesSent for user: ${user.name}`);
   } catch (err) {
     console.error(

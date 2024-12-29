@@ -35,7 +35,7 @@ export const bioRequest = async (inputs) => {
     console.log("sending inputs ", inputs);
 
     if (!inputs.username || !inputs.biography) {
-      throw new Error("Invalid inputs: username and bio are required.");
+      throw new Error("Invalid inputs: username and biography are required.");
     }
     const response = await axios.put(
       "http://localhost:3000/biography",
