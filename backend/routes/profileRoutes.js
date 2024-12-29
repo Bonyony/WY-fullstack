@@ -6,5 +6,5 @@ module.exports = function (app) {
     next();
   });
 
-  app.post("/biography", controller.updateBiography);
+  app.put("/biography", controller.updateBiography);
 };

@@ -27,7 +27,17 @@ import RootLayout from "./layouts/RootLayout";
 import HomeLayout from "./layouts/HomeLayout";
 import usePersistedState from "./components/hooks/usePersistedState";
 
-export const ProfileContext = createContext({});
+export const ProfileContext = createContext();
+
+export const ProfileProvider = ({ children }) => {
+  const [profile, setProfile] = useState(null);
+
+  return (
+    <ProfileContext.Provider value={{ profile, setProfile }}>
+      {children}
+    </ProfileContext.Provider>
+  );
+};
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,11 +68,11 @@ function App({ location }) {
   return (
     <>
       <div className="suse bg-base-200">
-        <ProfileContext.Provider value={{ profile, setProfile }}>
+        <ProfileProvider>
           <Suspense fallback={<Loading />}>
             <RouterProvider router={router} />
           </Suspense>
-        </ProfileContext.Provider>
+        </ProfileProvider>
       </div>
     </>
   );

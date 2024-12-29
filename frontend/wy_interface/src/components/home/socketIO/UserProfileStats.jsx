@@ -1,21 +1,35 @@
 import React, { useContext, useState } from "react";
 import { ProfileContext } from "../../../App";
-import axios from "axios";
 import { bioRequest } from "../../../utils/apiUtils";
 
 const UserProfileStats = () => {
   const [updating, setUpdating] = useState(false);
   const [input, setInput] = useState({});
   const { profile, setProfile } = useContext(ProfileContext);
+
   console.log(profile);
+  // editing the bio now causes roles to appear as the coded verison
+  // need to fix the auth system
 
-  const updateBio = () => {
-    // yum yum yum
-    // set updating to true
-
-    // when done set updating to false
-    setUpdating(!updating);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput((values) => ({ ...values, [name]: value }));
   };
+
+  const formAction = async (e) => {
+    e.preventDefault();
+    const payload = { ...input, username: profile.username };
+    try {
+      const userData = await bioRequest(payload);
+      console.log(userData);
+      setProfile(userData);
+      setUpdating(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const isBioValid = input.biography && input.biography.length <= 500;
 
   return (
     <div className="stats stats-vertical shadow">
@@ -39,7 +53,7 @@ const UserProfileStats = () => {
           </svg>
         </div>
         <div className="stat-title">Messages Sent</div>
-        <div className="stat-value text-primary">25.6K</div>
+        <div className="stat-value text-primary">25.6K Not done yet</div>
       </div>
       {/* User Bio */}
       <div className="stat">
@@ -57,37 +71,40 @@ const UserProfileStats = () => {
               d="M13 10V3L4 14h7v7l9-11h-7z"
             ></path>
           </svg>
-          {/* Put a button here to edit the bio.
-            It will:
-            1. Open an input box
-            2. Be able to send the details
-            It should have:
-            1. some sort of PUT or PATCH request
-            2. feedback for length of bio (< 500)
-            3. A nice look to it
-            4. setProfile as new Profile object
-        */}
-          <button onClick={updateBio}>
-            {updating ? "Update Bio" : "Edit Bio"}
+          <button className="" onClick={() => setUpdating(!updating)}>
+            {updating ? "Cancel" : "Edit Bio"}
           </button>
         </div>
-        <div className="stat-title">Biography</div>
+        <label for="biography" className="stat-title">
+          Biography
+        </label>
         {!updating && (
-          <div className=" text-secondary">
-            {
-              // This ternary is to ensure that all profiles have default text
-              // In production there should be no null bios
-              profile.biography == null
-                ? "This user hasn't added a biography yet."
-                : profile.biography
-            }
-          </div>
+          <div className=" text-secondary">{profile.biography}</div>
         )}
         {updating && (
-          <textarea
-            className="textarea textarea-bordered mt-1"
-            placeholder="Maybe have old bio be placeholder?"
-          ></textarea>
+          <form className="" onSubmit={formAction}>
+            <textarea
+              id="biography"
+              name="biography"
+              value={input.biography || ""}
+              className="textarea textarea-bordered mt-1 w-full"
+              placeholder="Maybe have old bio be placeholder?"
+              maxLength={500}
+              onChange={handleChange}
+            ></textarea>
+            <button
+              className="btn btn-primary mt-2"
+              type="submit"
+              disabled={!isBioValid}
+            >
+              Submit
+            </button>
+            {!isBioValid && (
+              <p className="text-error">
+                Biography must be less than 500 characters.
+              </p>
+            )}
+          </form>
         )}
       </div>
       {/* Clearance Levels */}
