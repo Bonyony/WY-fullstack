@@ -54,3 +54,24 @@ export const bioRequest = async (inputs) => {
     throw error;
   }
 };
+
+export const getUserProfile = async (inputs) => {
+  try {
+    if (!inputs.username) {
+      throw new Error("Invalid inputs: username and biography are required.");
+    }
+
+    // the axios GET method takes a different order of parameters than PUT and POST
+    const response = await axios.get("http://localhost:3000/getprofile", {
+      params: inputs,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

@@ -1,24 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../../App";
-import { bioRequest } from "../../../utils/apiUtils";
+import { bioRequest, getUserProfile } from "../../../utils/apiUtils";
+import { checkMessagesSent } from "../../../utils/profileUtils";
 
 const UserProfileStats = () => {
   const [updating, setUpdating] = useState(false);
   const [input, setInput] = useState({});
   const { profile, setProfile } = useContext(ProfileContext);
 
-  console.log(profile);
-
-  // looks kind of ugly, but whatever
-  // this could just be a GET request also
-  // instead of reusing bioRequest?
   useEffect(() => {
     const fetchLatestProfile = async () => {
       try {
-        const userData = await bioRequest({
-          biography: profile.biography,
+        const userData = await getUserProfile({
           username: profile.username,
         });
+        console.log(userData);
         setProfile(userData);
       } catch (err) {
         console.log(err);
@@ -72,6 +68,9 @@ const UserProfileStats = () => {
         </div>
         <div className="stat-title">Messages Sent</div>
         <div className="stat-value text-primary">{profile.messagesSent}</div>
+        <p className="text-secondary text-xs">
+          {checkMessagesSent(profile.messagesSent)}
+        </p>
       </div>
       {/* User Bio */}
       <div className="stat">

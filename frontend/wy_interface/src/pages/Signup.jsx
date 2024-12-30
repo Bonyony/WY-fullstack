@@ -24,7 +24,7 @@ const Signup = () => {
   const formAction = async (e) => {
     e.preventDefault();
     try {
-      signupRequest(inputs);
+      await signupRequest(inputs);
       const userData = await loginRequest(inputs);
       setProfile(userData);
       navigate("/home/dashboard");
