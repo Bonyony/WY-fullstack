@@ -3,6 +3,7 @@ const Profile = dbModels.profile;
 
 exports.updateBiography = async (req, res) => {
   try {
+    console.log("Recieved: ", JSON.stringify(req.body, null, 2));
     if (!req.body.username || !req.body.biography) {
       return res
         .status(400)

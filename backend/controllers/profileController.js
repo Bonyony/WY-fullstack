@@ -4,6 +4,7 @@ const Profile = dbModels.profile;
 exports.getData = async (req, res) => {
   try {
     const { username } = req.query;
+    console.log(`${username} recieved`);
     if (!username) {
       return res.status(400).send({ message: "Username required." });
     }
@@ -13,6 +14,7 @@ exports.getData = async (req, res) => {
     }).populate("roles", "-__v");
 
     if (!user) {
+      console.log("username not found for ", username);
       return res.status(404).send({ message: "User not found" });
     }
 
