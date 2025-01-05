@@ -79,4 +79,15 @@ describe("PUT /biography", () => {
       message: "Username and biography required.",
     });
   });
+
+  it("should return 404 if the user does not exist", async () => {
+    const response = await request(app).put("/biography").send({
+      username: "NotinDB",
+      biography: "Bio holder",
+    });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({
+      message: "User not found",
+    });
+  });
 });
