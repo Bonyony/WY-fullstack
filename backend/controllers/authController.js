@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
       return res.status(401).send({ message: "Invalid Password" });
     }
 
-    // Generate JWT token
+    // Generates the JWT token
     const token = jwt.sign({ id: user.id }, config.secret, {
       algorithm: "HS256",
       allowInsecureKeySizes: true,
