@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = ({ profile }) => {
   return (
@@ -18,6 +19,9 @@ const Hero = ({ profile }) => {
             Thank you for visiting! Feel free to chat, relax and have a good
             time!
           </p>
+          <Link className="btn btn-primary w-[200px]" to="/home/chatselect">
+            Chat Now!
+          </Link>
         </div>
       </div>
     </div>
